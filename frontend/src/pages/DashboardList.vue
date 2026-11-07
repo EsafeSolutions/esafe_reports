@@ -9,10 +9,10 @@
         {{ t('Dashboards') }}
       </div>
       <h1 style="font-size: 32px; font-weight: 800; letter-spacing: -0.03em; margin-top: 10px">
-        {{ t('Lumen Reports') }}
+        ESAFE REPORT
       </h1>
       <div class="flex items-end justify-between gap-4">
-        <p style="color: var(--muted); margin-top: 6px">{{ t('Fast, live, beautiful dashboards for Frappe') }}</p>
+        <p style="color: var(--muted); margin-top: 6px">{{ t('Your business, in focus.') }}</p>
         <router-link v-if="dashboards.data?.can_create" to="/new" class="lbtn primary" style="text-decoration: none">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
             <path d="M12 5v14M5 12h14" />
@@ -21,6 +21,11 @@
         </router-link>
       </div>
     </div>
+
+    <router-link to="/pos" class="panel block p-[18px] mb-6" style="text-decoration: none">
+      <strong style="color: var(--blue)">{{ t('Connect to ESAFE POS') }} →</strong>
+      <p class="mt-1" style="color: var(--muted)">{{ t('Check your connection and set up the sales dashboard inside Insights.') }}</p>
+    </router-link>
 
     <div v-if="dashboards.loading" class="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
       <div v-for="i in 3" :key="i" class="skel" style="height: 128px; border-radius: 16px"></div>

@@ -5,6 +5,7 @@
 tags
 node_modules
 __pycache__
+.qa/
 
 # The built frontend IS committed, so a bench that cannot run the build
 # (Frappe v14 on Node below 18, common on shared benches) still ships the SPA

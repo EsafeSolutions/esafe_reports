@@ -47,7 +47,7 @@ SOURCE = "POS Invoice"
 LINES = "POS Invoice Item"
 PAYMENTS = "Sales Invoice Payment"  # shared with Sales Invoice; the engine keeps parenttype = POS Invoice
 
-DESCRIPTION = "Takings, outlets, payment methods, items and busy hours from LumenPOS."
+DESCRIPTION = "Takings, outlets, payment methods, items and busy hours from ESAFE POS."
 
 FILTERS = [
 	{
@@ -223,7 +223,7 @@ WIDGETS = [
 # the Arabic interface
 AR = {
 	"POS Sales": "مبيعات نقاط البيع",
-	DESCRIPTION: "المبيعات ونقاط البيع وطرق الدفع والأصناف وأوقات الذروة من LumenPOS.",
+	DESCRIPTION: "المبيعات ونقاط البيع وطرق الدفع والأصناف وأوقات الذروة من ESAFE POS.",
 	"Net Sales": "صافي المبيعات",
 	"Invoices": "الفواتير",
 	"Average Basket": "متوسط قيمة السلة",
@@ -369,6 +369,9 @@ def get_status():
 
 	return {
 		**_links(),
+		"product": "ESAFE REPORT",
+		"pos_installed": "lumenpos" in frappe.get_installed_apps(),
+		"can_read_source": has_source and frappe.has_permission(SOURCE, "read"),
 		"license": licensing.get_status().get("status"),
 		"dashboard_exists": bool(name),
 		"can_view": can_view,
@@ -397,13 +400,13 @@ def ensure_dashboard(lang: str | None = None):
 	if expired and not frappe.conf.get("developer_mode"):
 		return _refusal(
 			"license_expired",
-			_("The Lumen Reports subscription on this site has lapsed. Renew it to set up Insights."),
+			_("The ESAFE REPORT subscription on this site has lapsed. Renew it to set up Insights."),
 		)
 	if not frappe.has_permission("Lumen Dashboard", "create"):
 		return _refusal(
 			"not_permitted",
 			_(
-				"Setting up Insights needs Lumen Builder, Lumen Manager or System Manager. "
+				"Setting up Insights needs an ESAFE REPORT builder, manager or System Manager. "
 				"Ask an administrator to open Insights once."
 			),
 		)

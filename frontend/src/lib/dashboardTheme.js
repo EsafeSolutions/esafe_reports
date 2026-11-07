@@ -72,7 +72,7 @@ export const SURFACES = [
 export const THEME_PRESETS = [
   {
     id: 'light',
-    name: 'Lumen Light',
+    name: 'ESAFE Light',
     base: 'light',
     card: 'outlined',
     vars: {
@@ -82,7 +82,7 @@ export const THEME_PRESETS = [
       '--panel-3': '#e9edf4',
       '--border': '#e4e8f0',
       '--border-2': '#d4dae5',
-      '--ink': '#0c1322',
+      '--ink': '#11264a',
       '--ink-2': '#3a4456',
       '--muted': '#687386',
       '--faint': '#98a1b2',
@@ -91,8 +91,8 @@ export const THEME_PRESETS = [
       '--chip': '#f0f3f8',
       '--shadow': '0 1px 2px rgba(16,24,40,0.06), 0 1px 3px rgba(16,24,40,0.05)',
       '--shadow-md': '0 8px 24px rgba(16,24,40,0.08), 0 2px 6px rgba(16,24,40,0.04)',
-      '--blue': '#1463ff',
-      '--c1': '#1463ff',
+      '--blue': '#087f77',
+      '--c1': '#0fa99b',
       '--c2': '#0f9d7a',
       '--c3': '#9b5bff',
       '--c4': '#e0772c',
@@ -110,7 +110,7 @@ export const THEME_PRESETS = [
   },
   {
     id: 'dark',
-    name: 'Lumen Dark',
+    name: 'ESAFE Dark',
     base: 'dark',
     card: 'flat',
     vars: {

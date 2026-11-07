@@ -2,12 +2,12 @@
 # SPDX-License-Identifier: LicenseRef-Lumen-Proprietary
 # Proprietary and confidential. See license.txt. "Lumen Reports" is a trademark of Lumen Solutions.
 app_name = "lumen_reports"
-app_title = "Lumen Reports"
-app_publisher = "Lumen Solutions"
-app_description = "Beautiful, fast, live-updating dashboards and reports for Frappe — with a no-code builder and plain-English Ask AI"
-app_email = "hello@lumen-solutions.co"
+app_title = "ESAFE REPORT"
+app_publisher = "Esafe (PVT) LTD"
+app_description = "ESAFE REPORT — live sales dashboards and reporting connected to ESAFE POS"
+app_email = "hello@esafe.lk"
 app_license = "Proprietary"
-app_logo_url = "/assets/lumen_reports/logo/svg/app-icon.svg"
+app_logo_url = "/assets/lumen_reports/logo/esafe.png"
 required_apps = []  # ERPNext optional; supports Frappe v15 and v16 (see pyproject.toml)
 
 # Apps
@@ -19,9 +19,9 @@ required_apps = []  # ERPNext optional; supports Frappe v15 and v16 (see pyproje
 add_to_apps_screen = [
 	{
 		"name": "lumen_reports",
-		"logo": "/assets/lumen_reports/logo/svg/app-icon.svg",
-		"title": "Lumen Reports",
-		"route": "/lumen",
+		"logo": app_logo_url,
+		"title": app_title,
+		"route": "/esafe-report/pos",
 	}
 ]
 
@@ -169,6 +169,8 @@ has_permission = {
 }
 
 website_route_rules = [
+	{"from_route": "/esafe-report", "to_route": "lumen"},
+	{"from_route": "/esafe-report/<path:app_path>", "to_route": "lumen"},
 	{"from_route": "/lumen/<path:app_path>", "to_route": "lumen"},
 ]
 

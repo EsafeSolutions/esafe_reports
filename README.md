@@ -1,15 +1,24 @@
 <div align="center">
 
-<img src="lumen_reports/public/logo/svg/app-icon.svg" width="76" height="76" alt="Lumen Reports" />
+<img src="lumen_reports/public/logo/esafe.png" width="76" height="76" alt="ESAFE REPORT" />
 
-# Lumen Reports
+# ESAFE REPORT
 
-**Beautiful, fast, live-updating dashboards and reports for Frappe / ERPNext.**
+**Live sales dashboards and reports connected to ESAFE POS.**
 
 Build dashboards by dragging, from a template, or by asking in plain words.
 Style them your way, send them as PDF reports, and use the whole app in English or Arabic.
 
 </div>
+
+Open `/esafe-report/pos` to check the same-site POS connection and create the sales
+dashboard. Then use **POS → Insights → Sales dashboard**. See
+[ESAFE POS setup](docs/ESAFE-POS-SETUP.md) for installation and permissions.
+
+This customization keeps the technical app name `lumen_reports`, existing DocTypes,
+roles, API methods and `/lumen` URLs compatible with ESAFE POS and existing sites.
+The original licence, source notices, report attribution and entitlement checks
+remain in place. The reference documentation below uses the upstream technical names.
 
 ---
 

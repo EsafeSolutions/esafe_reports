@@ -5,6 +5,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
+    path: '/pos',
+    name: 'POSConnection',
+    component: () => import('@/pages/POSConnection.vue'),
+  },
+  {
     path: '/',
     name: 'DashboardList',
     component: () => import('@/pages/DashboardList.vue'),
@@ -59,6 +64,7 @@ const routes = [
 ]
 
 export default createRouter({
-  history: createWebHistory('/lumen'),
+  // Both entry points serve the same app; existing bookmarks and POS embeds keep working.
+  history: createWebHistory(window.location.pathname.startsWith('/esafe-report') ? '/esafe-report' : '/lumen'),
   routes,
 })

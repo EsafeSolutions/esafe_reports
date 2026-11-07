@@ -9,12 +9,12 @@
           <router-link to="/" class="brand">
             <img class="tile" :src="appIcon" alt="" width="36" height="36" />
             <span>
-              <span v-if="lang === 'ar'" class="wm">لومن <b>تقارير</b></span>
-              <span v-else class="wm">Lumen<b>Reports</b></span>
+              <span class="wm">ESAFE <b>REPORT</b></span>
               <small>{{ t('ANALYTICS') }}</small>
             </span>
           </router-link>
           <span class="sp" style="flex: 1"></span>
+          <router-link to="/pos" class="theme-btn" style="text-decoration: none">{{ t('POS connection') }}</router-link>
           <router-link to="/ask" class="theme-btn" style="text-decoration: none; border-color: transparent; background: color-mix(in srgb, var(--blue) 10%, transparent); color: var(--blue)">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 3v2M12 19v2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M3 12h2M19 12h2M5.6 18.4 7 17M17 7l1.4-1.4" />
@@ -81,11 +81,11 @@ applyLang()
 // inside another app's page the host has its own header. The path check covers
 // the first paint, before the router has resolved the route
 const route = useRoute()
-const embed = computed(() => Boolean(route.meta.embed) || window.location.pathname.startsWith('/lumen/embed/'))
+const embed = computed(() => Boolean(route.meta.embed) || /^\/(?:lumen|esafe-report)\/embed\//.test(window.location.pathname))
 
 // served by Frappe from the app's public folder, not bundled — bound rather than
 // a literal src so Vite doesn't try to resolve it at build time
-const appIcon = '/assets/lumen_reports/logo/svg/app-icon.svg'
+const appIcon = '/assets/lumen_reports/logo/esafe.png'
 
 // unlicensed use should be visible rather than silent; a failure to check
 // must never keep the app from loading

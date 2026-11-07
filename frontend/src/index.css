@@ -21,11 +21,11 @@
 
 /* ===== LUMEN DESIGN TOKENS (from Lumen Dashboard Kit) ===== */
 :root {
-  --blue: #1463ff;
-  --blue-600: #0f54e0;
-  --blue-deep: #0b43b8;
-  --blue-300: #7fa8ff;
-  --c1: #1463ff;
+  --blue: #087f77;
+  --blue-600: #066b65;
+  --blue-deep: #085c58;
+  --blue-300: #62cfc6;
+  --c1: #0fa99b;
   --c2: #0f9d7a;
   --c3: #9b5bff;
   --c4: #e0772c;
@@ -50,7 +50,7 @@
   --panel-3: #e9edf4;
   --border: #e4e8f0;
   --border-2: #d4dae5;
-  --ink: #0c1322;
+  --ink: #11264a;
   --ink-2: #3a4456;
   --muted: #687386;
   --faint: #98a1b2;
@@ -149,7 +149,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  background: #11264a;
   backdrop-filter: saturate(160%) blur(14px);
   border-bottom: 1px solid var(--border);
 }
@@ -157,7 +157,9 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
-  height: 64px;
+  min-height: 64px;
+  flex-wrap: wrap;
+  padding: 10px 0;
 }
 .brand {
   display: flex;
@@ -166,22 +168,20 @@ body {
   font-weight: 800;
   font-size: 17px;
   white-space: nowrap;
-  color: var(--ink);
+  color: #ffffff;
   text-decoration: none;
 }
-/* the official app-icon carries its own gradient and corner radius — we only
-   add the lift. Never recolour or restyle the mark itself. */
+/* Use the existing ESAFE mark without recoloring it. */
 .brand .tile {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(20, 99, 255, 0.35);
+  object-fit: contain;
   flex: none;
   display: block;
 }
-/* "Reports" always carries the blue — never set the wordmark in one colour */
 .brand .wm b {
-  color: var(--blue);
+  color: #4ed8cb;
   font-weight: 800;
 }
 .brand small {
@@ -190,7 +190,7 @@ body {
   font-size: 9px;
   font-weight: 500;
   letter-spacing: 0.16em;
-  color: var(--muted);
+  color: #b4c8de;
   margin-top: -2px;
 }
 .theme-btn {
@@ -210,6 +210,17 @@ body {
 }
 .theme-btn:hover {
   border-color: var(--blue-300);
+}
+.hd .theme-btn {
+  background: #1b365a !important;
+  border-color: #365070 !important;
+  color: #eaf5ff !important;
+}
+@media (max-width: 640px) {
+  .hd .row { gap: 8px; }
+  .hd .theme-btn { padding: 0 10px; height: 34px; font-size: 12px; }
+  .hd .brand { margin-inline-end: auto; }
+  .hd .sp { display: none; }
 }
 
 /* ===== panels ===== */

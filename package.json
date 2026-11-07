@@ -2,7 +2,7 @@
   "name": "lumen_reports",
   "private": true,
   "version": "1.4.0",
-  "description": "Beautiful, fast, live-updating reports and dashboards for Frappe",
+  "description": "ESAFE REPORT — live sales dashboards connected to ESAFE POS",
   "scripts": {
     "dev": "cd frontend && yarn dev",
     "build": "cd frontend && yarn install --frozen-lockfile && yarn build"

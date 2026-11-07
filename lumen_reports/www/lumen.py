@@ -19,12 +19,12 @@ APP_ROLES = {
 
 def get_context(context):
 	if frappe.session.user == "Guest":
-		frappe.throw(frappe._("Please login to access Lumen Reports"), frappe.PermissionError)
+		frappe.throw(frappe._("Please login to access ESAFE REPORT"), frappe.PermissionError)
 	if frappe.session.user != "Administrator" and not (APP_ROLES & set(frappe.get_roles())):
 		frappe.throw(
 			frappe._(
-				"You don't have access to Lumen Reports yet. Ask your administrator for "
-				"one of these roles: Lumen Viewer, Lumen Builder or Lumen Manager."
+				"You don't have access to ESAFE REPORT yet. Ask your administrator for "
+				"ESAFE REPORT viewer, builder or manager access."
 			),
 			frappe.PermissionError,
 		)
