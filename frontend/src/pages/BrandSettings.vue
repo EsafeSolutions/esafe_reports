@@ -12,7 +12,7 @@
     </div>
 
     <p v-if="!brand.can_manage" class="err">
-      {{ t('Only a Lumen Manager can change the visual identity. Ask your administrator.') }}
+      {{ t('Only an ESAFE REPORT manager can change the visual identity. Ask your administrator.') }}
     </p>
 
     <div v-else class="cols">
@@ -79,7 +79,7 @@
                 :placeholder="t('For example: Confidential, for internal use')"
                 maxlength="120"
               />
-              <p class="hint">{{ t('Printed in the middle of the page foot, beside the Lumen Reports credit.') }}</p>
+              <p class="hint">{{ t('Printed in the middle of the page foot, beside the ESAFE REPORT credit.') }}</p>
             </div>
 
             <div class="lfield">
@@ -165,7 +165,7 @@
                 <i v-for="(color, i) in previewPalette" :key="i" :style="{ background: color }"></i>
               </div>
               <div class="ft">
-                <span>Created by Lumen Reports</span>
+                <span>Created by ESAFE REPORT</span>
                 <span v-if="form.footer_text" class="own" dir="auto">{{ form.footer_text }}</span>
                 <span class="pg mono" dir="ltr">1 / 3</span>
               </div>

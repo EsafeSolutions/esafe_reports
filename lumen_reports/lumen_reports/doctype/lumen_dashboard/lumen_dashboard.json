@@ -61,7 +61,7 @@
   },
   {
    "depends_on": "is_published",
-   "description": "Leave empty to make a published dashboard visible to everyone with Lumen access; add roles to restrict it to them",
+   "description": "Leave empty to make a published dashboard visible to everyone with ESAFE REPORT access; add roles to restrict it to them",
    "fieldname": "visible_to_roles",
    "fieldtype": "Table MultiSelect",
    "label": "Visible To Roles",
@@ -69,7 +69,7 @@
   },
   {
    "depends_on": "is_published",
-   "description": "Share with specific people. For Lumen Restricted Viewers this list IS their access: they only ever see dashboards that name them",
+   "description": "Share with specific people. For restricted report viewers this list IS their access: they only ever see dashboards that name them",
    "fieldname": "visible_to_users",
    "fieldtype": "Table MultiSelect",
    "label": "Visible To Users",

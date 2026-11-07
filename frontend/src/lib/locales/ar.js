@@ -19,7 +19,7 @@ export default {
   Dark: 'داكن',
   Light: 'فاتح',
   Dashboards: 'اللوحات',
-  'Lumen Reports': 'لومن تقارير',
+  'ESAFE REPORT': 'ESAFE REPORT',
   'Fast, live, beautiful dashboards for Frappe': 'لوحات سريعة ومباشرة وأنيقة لفرابيه',
   'New dashboard': 'لوحة جديدة',
   Live: 'مباشر',
@@ -252,8 +252,8 @@ export default {
   Preset: 'نمط جاهز',
   'Follow the app theme': 'اتباع سمة التطبيق',
   'App default': 'افتراضي التطبيق',
-  'Lumen Light': 'لومن الفاتح',
-  'Lumen Dark': 'لومن الداكن',
+  'ESAFE Light': 'إيسيف الفاتح',
+  'ESAFE Dark': 'إيسيف الداكن',
   Emerald: 'زمردي',
   Midnight: 'منتصف الليل',
   Sand: 'رملي',
@@ -292,8 +292,8 @@ export default {
   'One saved look. Every dashboard and every report follows it unless it sets its own.':
     'مظهر واحد محفوظ. كل لوحة وكل تقرير يتبعه ما لم يحدد مظهرا خاصا به.',
   'Back to dashboards': 'العودة إلى اللوحات',
-  'Only a Lumen Manager can change the visual identity. Ask your administrator.':
-    'تغيير الهوية البصرية متاح لمدير لومن فقط. تواصل مع مدير النظام.',
+  'Only an ESAFE REPORT manager can change the visual identity. Ask your administrator.':
+    'تغيير الهوية البصرية متاح لمدير ESAFE REPORT فقط. تواصل مع مدير النظام.',
   'What a printed report says it comes from': 'ما يظهر في التقرير المطبوع كجهة إصدار',
   'Organization name': 'اسم المنشأة',
   'Blank uses the Company on this site': 'تركه فارغا يستخدم الشركة المعرفة في الموقع',
@@ -308,8 +308,8 @@ export default {
   'Pick colors from this image': 'استخراج الألوان من هذه الصورة',
   'Report footer line': 'سطر أسفل صفحة التقرير',
   'For example: Confidential, for internal use': 'مثال: سري، للاستخدام الداخلي',
-  'Printed in the middle of the page foot, beside the Lumen Reports credit.':
-    'يطبع في منتصف أسفل الصفحة، بجانب حقوق لومن تقارير.',
+  'Printed in the middle of the page foot, beside the ESAFE REPORT credit.':
+    'يطبع في منتصف أسفل الصفحة، بجانب حقوق ESAFE REPORT.',
   'Colors found': 'الألوان المستخرجة',
   'Chosen by AI from your identity': 'اختارها الذكاء الاصطناعي من هويتك',
   'Measured from the image': 'مقاسة من الصورة',
@@ -344,12 +344,12 @@ export default {
   'What does this dashboard show?': 'ماذا تعرض هذه اللوحة؟',
   'Live updates': 'التحديث المباشر',
   'Who can see it': 'من يمكنه رؤيتها',
-  'Empty means everyone with Lumen access. Add roles to restrict it. Each viewer still only sees the data their own permissions allow.':
-    'تركها فارغة يعني أنها متاحة لكل من لديه صلاحية الدخول إلى لومن. أضف أدوارا لتقييدها. يرى كل مشاهد البيانات التي تسمح بها صلاحياته فقط.',
+  'Empty means everyone with ESAFE REPORT access. Add roles to restrict it. Each viewer still only sees the data their own permissions allow.':
+    'تركها فارغة يعني أنها متاحة لكل من لديه صلاحية الدخول إلى ESAFE REPORT. أضف أدوارا لتقييدها. يرى كل مشاهد البيانات التي تسمح بها صلاحياته فقط.',
   'Add role…': 'إضافة دور…',
   'Add person…': 'إضافة شخص…',
-  'To give someone only this dashboard, assign them the Lumen Restricted Viewer role and add them here. Restricted viewers see nothing except dashboards that name them.':
-    'لمنح شخص هذه اللوحة وحدها، أسند إليه دور Lumen Restricted Viewer وأضفه هنا. لا يرى المشاهد المقيد إلا اللوحات التي تذكره بالاسم.',
+  'To give someone only this dashboard, ask your administrator to grant restricted reporting access and add them here. Restricted viewers see nothing except dashboards that name them.':
+    'لمنح شخص هذه اللوحة وحدها، اطلب من مدير النظام منحه صلاحية عرض التقارير المقيدة وأضفه هنا. لا يرى المشاهد المقيد إلا اللوحات التي تذكره بالاسم.',
   'Dashboard filters': 'عوامل تصفية اللوحة',
   'Filters apply to every widget built on a matching doctype. Pick any link, choice or checkbox field, including line item fields such as Item or Item Group.':
     'تطبق عوامل التصفية على كل عنصر مبني على نوع مستند مطابق. اختر أي حقل ارتباط أو اختيار أو خانة اختيار، بما في ذلك حقول البنود مثل الصنف أو مجموعة الأصناف.',
@@ -460,8 +460,8 @@ export default {
   // ---- ask your data
   'Ask your data anything': 'اسأل بياناتك عن أي شيء',
   'AI settings': 'إعدادات الذكاء الاصطناعي',
-  "Describe the report you want. It is built with Lumen's report engine, using only data you are permitted to see. Keep it as a one-off answer or pin it to a dashboard.":
-    'صف التقرير الذي تريده. يبنى بمحرك تقارير لومن باستخدام البيانات المسموح لك بالاطلاع عليها فقط. احتفظ به إجابة لمرة واحدة أو ثبته في لوحة.',
+  "Describe the report you want. It is built with the ESAFE REPORT engine, using only data you are permitted to see. Keep it as a one-off answer or pin it to a dashboard.":
+    'صف التقرير الذي تريده. يبنى بمحرك ESAFE REPORT باستخدام البيانات المسموح لك بالاطلاع عليها فقط. احتفظ به إجابة لمرة واحدة أو ثبته في لوحة.',
   'Using your personal key': 'يستخدم مفتاحك الشخصي',
   'Using the site-wide shared key': 'يستخدم مفتاح الموقع المشترك',
   'Connect a Gemini API key': 'اربط مفتاح Gemini',

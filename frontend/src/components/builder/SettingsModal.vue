@@ -31,7 +31,7 @@
       <div v-if="local.is_published" class="lfield">
         <label>{{ t('Who can see it') }}</label>
         <p style="font-size: 12.5px; color: var(--muted); margin-bottom: 6px">
-          {{ t('Empty means everyone with Lumen access. Add roles to restrict it. Each viewer still only sees the data their own permissions allow.') }}
+          {{ t('Empty means everyone with ESAFE REPORT access. Add roles to restrict it. Each viewer still only sees the data their own permissions allow.') }}
         </p>
         <div class="flex flex-wrap items-center gap-2">
           <span v-for="r in local.visible_to_roles" :key="r" class="aud-chip">
@@ -59,7 +59,7 @@
           </select>
         </div>
         <p style="font-size: 12px; color: var(--faint); margin-top: 6px">
-          {{ t('To give someone only this dashboard, assign them the Lumen Restricted Viewer role and add them here. Restricted viewers see nothing except dashboards that name them.') }}
+          {{ t('To give someone only this dashboard, ask your administrator to grant restricted reporting access and add them here. Restricted viewers see nothing except dashboards that name them.') }}
         </p>
       </div>
 

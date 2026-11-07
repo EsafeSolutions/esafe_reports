@@ -104,21 +104,21 @@ def is_licensed() -> bool:
 NOTICES = {
 	"en": {
 		STATUS_EXPIRED: (
-			"Your Lumen Reports subscription is no longer active. Dashboards stay "
+			"Your ESAFE REPORT subscription is no longer active. Dashboards stay "
 			"visible, but you can't create or edit them until it's renewed."
 		),
 		STATUS_UNLICENSED: (
-			"This copy of Lumen Reports has no licence. Contact hello@lumen-solutions.co "
+			"This copy of ESAFE REPORT has no licence. Contact hello@lumen-solutions.co "
 			"for a licence to use it in production."
 		),
 	},
 	"ar": {
 		STATUS_EXPIRED: (
-			"انتهى اشتراكك في لومن تقارير. تبقى اللوحات ظاهرة، لكن لا يمكن إنشاؤها أو "
+			"انتهى اشتراكك في ESAFE REPORT. تبقى اللوحات ظاهرة، لكن لا يمكن إنشاؤها أو "
 			"تعديلها حتى يجدد الاشتراك."
 		),
 		STATUS_UNLICENSED: (
-			"هذه النسخة من لومن تقارير غير مرخصة. تواصل مع hello@lumen-solutions.co "
+			"هذه النسخة من ESAFE REPORT غير مرخصة. تواصل مع hello@lumen-solutions.co "
 			"للحصول على ترخيص لاستخدامها في بيئة التشغيل."
 		),
 	},
@@ -141,7 +141,7 @@ def require_license():
 		return
 	if get_status().get("status") == STATUS_EXPIRED:
 		frappe.throw(
-			_("Your Lumen Reports subscription is no longer active. Renew it to make changes."),
+			_("Your ESAFE REPORT subscription is no longer active. Renew it to make changes."),
 			title=_("Subscription inactive"),
 		)
 

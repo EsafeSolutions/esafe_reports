@@ -53,7 +53,7 @@ const routes = [
     props: true,
   },
   {
-    // for another app's page, such as LumenPOS Insights: the dashboard without
+    // for another app's page, such as ESAFE POS Insights: the dashboard without
     // the app's header, navigation or edit controls
     path: '/embed/:slug',
     name: 'DashboardEmbed',

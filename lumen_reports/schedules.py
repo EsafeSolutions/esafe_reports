@@ -167,7 +167,7 @@ def deliver(name):
 				outcome[_send_as(schedule.dashboard, row.user, options)].append(row.user)
 			except Exception:
 				frappe.log_error(
-					title=f"Lumen report {name}: could not send to {row.user}",
+					title=f"ESAFE REPORT {name}: could not send to {row.user}",
 					message=frappe.get_traceback(),
 				)
 				outcome["failed"].append(row.user)

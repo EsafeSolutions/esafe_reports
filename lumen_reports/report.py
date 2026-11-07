@@ -71,7 +71,7 @@ BASELINE = "#ccd3e0"
 # printed at the foot of every page, in both languages, on every site. An
 # organization's own footer line is set beside it, never in place of it:
 # removing the credit is a licensing conversation, not a setting.
-CREDIT = "Created by Lumen Reports"
+CREDIT = "Created by ESAFE REPORT"
 
 ARABIC_MONTHS = [
 	"يناير",

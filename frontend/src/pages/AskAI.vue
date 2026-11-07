@@ -18,7 +18,7 @@
         </button>
       </div>
       <p style="color: var(--muted); margin-top: 4px; font-size: 14.5px">
-        {{ t("Describe the report you want. It is built with Lumen's report engine, using only data you are permitted to see. Keep it as a one-off answer or pin it to a dashboard.") }}
+        {{ t("Describe the report you want. It is built with the ESAFE REPORT engine, using only data you are permitted to see. Keep it as a one-off answer or pin it to a dashboard.") }}
       </p>
       <span v-if="status?.configured" class="badge b-blue mt-2" style="margin-top: 8px">
         <span class="dot"></span>

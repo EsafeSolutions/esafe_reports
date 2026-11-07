@@ -17,17 +17,17 @@ dashboard. Then use **POS → Insights → Sales dashboard**. See
 
 This customization keeps the technical app name `lumen_reports`, existing DocTypes,
 roles, API methods and `/lumen` URLs compatible with ESAFE POS and existing sites.
-The original licence, source notices, report attribution and entitlement checks
-remain in place. The reference documentation below uses the upstream technical names.
+The original licence, source notices and entitlement checks
+remain in place. Role names and API identifiers below are the existing technical names.
 
 ---
 
-## Why Lumen
+## Why ESAFE REPORT
 
 Frappe ships capable but plain reporting. Getting a straight answer usually means
 exporting to a spreadsheet or waiting on a custom script report.
 
-Lumen is a standalone Vue 3 single-page app served at `/lumen`. It is **not** a BI
+ESAFE REPORT is a standalone Vue 3 single-page app served at `/esafe-report` (also available at `/lumen`). It is **not** a BI
 suite for analysts. It is an operational dashboard layer for the people who run the
 business, built on the doctypes you already have.
 
@@ -37,7 +37,7 @@ business, built on the doctypes you already have.
   place over websockets. No refresh button.
 - **No-code studio.** Start from a template or a blank canvas, edit any widget in a
   side inspector with a live preview, and drag and resize on a 12-column grid.
-- **Permission-safe by construction.** Lumen never runs raw SQL. Every widget stores
+- **Permission-safe by construction.** ESAFE REPORT never runs raw SQL. Every widget stores
   a query definition that the server compiles through Frappe's permission layer,
   checking read access on the base doctype *and* every joined doctype. PDF reports
   and scheduled emails are rendered with the same checks, as the person reading them.
@@ -66,7 +66,7 @@ business, built on the doctypes you already have.
 - **Studio.** A side inspector with live preview, undo and redo (Ctrl+Z,
   Ctrl+Shift+Z), duplicate (Ctrl+D), and autosave for drafts. Published dashboards
   change only on an explicit Save changes.
-- **Themes, per dashboard.** Six presets (Lumen Light, Lumen Dark, Emerald, Midnight,
+- **Themes, per dashboard.** Six presets (ESAFE Light, ESAFE Dark, Emerald, Midnight,
   Sand, Paper), plus primary and secondary color, card style (flat, outlined,
   elevated, glass), corner radius, density, background (solid, gradient, brand tint)
   and font. Charts read their colors from the dashboard's theme. A color set by hand
@@ -74,11 +74,11 @@ business, built on the doctypes you already have.
 - **Visual identity**, site-wide, at `/lumen/brand`. One saved look every dashboard
   and every report follows unless it sets its own: organization name, logo,
   letterhead, an own line in the middle of the page foot (beside the "Created by
-  Lumen Reports" credit, which always prints), the two faces a report prints in,
+  ESAFE REPORT" credit, which always prints), the two faces a report prints in,
   and a default theme. A
   dashboard overrides it field by field, so changing the identity restyles
   everything that never overrode that field. Upload the identity as an image and
-  Lumen reads the colors out of it, with the palette measured from the pixels and,
+  ESAFE REPORT reads the colors out of it, with the palette measured from the pixels and,
   when a Gemini key is set, the primary and secondary picked by the AI. Nothing is
   applied until the person confirms it. Needs Lumen Manager or System Manager.
 - **Two report fonts, one Latin and one Arabic.** A Latin family carries no Arabic
@@ -100,7 +100,7 @@ business, built on the doctypes you already have.
   executive summary, or explain what stands out. Every proposal is shown as a list of
   changes first, and applying it is a single undo step. It replies in the user's
   language.
-- **Ask AI** at `/lumen/ask`. Describe a report in plain English and Lumen generates
+- **Ask AI** at `/lumen/ask`. Describe a report in plain English and ESAFE REPORT generates
   validated widgets with a short written analysis, to save as a new dashboard or add
   to an existing one. It asks a clarifying question when a request is genuinely
   ambiguous, and surfaces the assumptions it made as one-tap refinements.
@@ -140,7 +140,7 @@ business, built on the doctypes you already have.
 ## Requirements
 
 - Frappe Framework **v14**, **v15** or **v16**
-- Works alongside ERPNext, or on any custom app. Lumen reads whatever doctypes exist.
+- Works alongside ERPNext, or on any custom app. ESAFE REPORT reads whatever doctypes exist.
 - The AI features are optional and need your own Google Gemini API key
 - **PDF reports and scheduled delivery need v15 or v16.** They render with
   WeasyPrint, which ships with those versions but not v14, so on v14 the Report
@@ -154,12 +154,12 @@ business, built on the doctypes you already have.
 From your bench directory:
 
 ```bash
-bench get-app https://github.com/ma7mod7osam/lumen_reports
+bench get-app https://github.com/EsafeSolutions/esafe_reports.git
 bench --site your-site.localhost install-app lumen_reports
 bench build --app lumen_reports
 ```
 
-Then open `https://your-site.localhost/lumen`.
+Then open `https://your-site.localhost/esafe-report/pos`.
 
 > The SPA is built from `frontend/` by the root `yarn build` script, which
 > `bench build` runs for you. To build it by hand: `yarn build` in the app root.
@@ -175,7 +175,7 @@ yarn build    # production build, served at /lumen
 
 ## Permissions
 
-Lumen ships four roles (created on install):
+ESAFE REPORT ships four roles (created on install):
 
 | Role | Can do |
 |---|---|
@@ -189,7 +189,7 @@ Three independent layers:
 1. **App access.** `/lumen` requires one of the roles above (System Managers always
    have access).
 2. **Dashboard visibility.** Drafts are private to their owner. Published dashboards
-   are visible to everyone with Lumen access, unless the dashboard names an audience
+   are visible to everyone with ESAFE REPORT access, unless the dashboard names an audience
    ("Who can see it" in settings): roles, specific people, or both. Restricted
    Viewers invert the default: they see nothing except dashboards that name them.
 3. **Data.** Every widget query runs through Frappe's permission layer for the
@@ -211,7 +211,7 @@ charge for it, sits with the Google account that owns the key.
    key** shared by everyone (a personal key always takes priority).
 
 Keys are stored **encrypted** in the site database, never returned to the browser and
-never included in error messages. The model only ever emits Lumen's query
+never included in error messages. The model only ever emits ESAFE REPORT's query
 specification, or the copilot's list of operations, and both are executed through the
 same permission-aware engine as every other widget. The AI never touches the
 database directly.
@@ -238,13 +238,13 @@ rows.
 | `report.py` | PDF rendering (WeasyPrint), English and Arabic |
 | `schedules.py` | Schedule runner (scheduler cron, every 10 minutes) and delivery as each recipient |
 | `licensing.py` | Frappe Cloud subscription check, cached, and never blocking reads |
-| `integrations/lumenpos.py` | LumenPOS Insights contract: read-only status, one-time dashboard setup, embed URL |
+| `integrations/lumenpos.py` | ESAFE POS Insights contract: read-only status, one-time dashboard setup, embed URL |
 | `frontend/` | Vue 3 + Vite + frappe-ui + ECharts SPA served at `/lumen` |
 | `lumen_reports/dev/` | Developer verification helpers, not part of the product surface |
 
-## LumenPOS Insights (integration)
+## ESAFE POS Insights (integration)
 
-LumenPOS can show a POS sales dashboard from Lumen Reports inside the POS. The two
+ESAFE POS can show a POS sales dashboard from ESAFE REPORT inside the POS. The two
 apps meet only at runtime, through the calls below, and neither imports the other.
 
 | Call | What it does |
@@ -255,7 +255,7 @@ apps meet only at runtime, through the calls below, and neither imports the othe
 - **Embed** at `/lumen/embed/<slug>`, optionally with `?lang=en|ar` and
   `?theme=light|dark`. It shows the dashboard with its filters and live updates,
   without the app header, navigation or edit controls.
-- **Access** is unchanged. The viewer needs a Lumen role, and **Lumen Restricted
+- **Access** is unchanged. The viewer needs a ESAFE REPORT role, and **Lumen Restricted
   Viewer** is enough: the dashboard names `LumenPOS Manager` as its audience, so that
   viewer sees this dashboard and nothing else. The numbers still need read permission
   on POS Invoice.
@@ -270,8 +270,8 @@ apps meet only at runtime, through the calls below, and neither imports the othe
 Some numbers cannot be written as a dashboard widget. The cost of goods sold reads a
 stock ledger, expands a bundle into its parts and estimates what has not been posted
 yet; a cash count compares a drawer against a shift. That knowledge belongs to the app
-that owns the subject, and Lumen Reports runs no raw SQL by design. So the owning app
-keeps the arithmetic and registers it here, and Lumen Reports becomes the way it is
+that owns the subject, and ESAFE REPORT runs no raw SQL by design. So the owning app
+keeps the arithmetic and registers it here, and ESAFE REPORT becomes the way it is
 reached: it holds the entry point, the licence state, the role gate and the filter
 contract, and the owning app's own permission rule is asked before its code runs.
 
@@ -311,13 +311,13 @@ def sources():
   with the wrong arguments.
 - **The owning app decides who may see it.** Its `capability` is called before its
   `method`, and a rule that raises counts as a refusal.
-- **A viewer needs a Lumen role, unless the definition names roles of its own.**
-  `roles` lists roles that stand in for a Lumen role **for that report only**: a shop
+- **A viewer needs a ESAFE REPORT role, unless the definition names roles of its own.**
+  `roles` lists roles that stand in for a ESAFE REPORT role **for that report only**: a shop
   manager who runs the till should not have to be given a reporting role as well to
   read the till's own numbers. Those roles open nothing else, not a dashboard, not the
   studio, not another app's report, and the owning app's `capability` still decides.
-  Without `roles`, a Lumen role is required, which is what lets a host app show an
-  "install Lumen Reports" card instead of a report.
+  Without `roles`, a ESAFE REPORT role is required, which is what lets a host app show an
+  "install ESAFE REPORT" card instead of a report.
 - **The licence is reported, never enforced.** `list_reports` returns the licence
   state so a host app can show a banner, and a report still runs: reads are not
   blocked here, the same way they are not blocked anywhere else in this app.

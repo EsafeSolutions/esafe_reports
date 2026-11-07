@@ -46,7 +46,7 @@
    "label": "Letterhead"
   },
   {
-   "description": "Printed in the middle of every report page foot, beside the Lumen Reports credit, which always prints.",
+   "description": "Printed in the middle of every report page foot, beside the ESAFE REPORT credit, which always prints.",
    "fieldname": "footer_text",
    "fieldtype": "Data",
    "label": "Report Footer Line"
@@ -82,7 +82,7 @@
    "label": "Default Theme"
   },
   {
-   "description": "The colors every dashboard and report follows unless it sets its own. Edited from Lumen Reports, not here.",
+   "description": "The colors every dashboard and report follows unless it sets its own. Edited from ESAFE REPORT, not here.",
    "fieldname": "theme_json",
    "fieldtype": "Code",
    "label": "Theme",

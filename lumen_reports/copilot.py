@@ -40,8 +40,8 @@ STATIC_TYPES = ("Heading", "Text", "Divider", "Image")
 AI_ELEMENTS = ("Heading", "Text", "Divider")
 
 THEME_PRESETS = {
-	"light": "Lumen Light, the default clean light look with a blue accent",
-	"dark": "Lumen Dark, near-black navy with a bright blue accent",
+	"light": "ESAFE Light, the default clean light look with a teal accent",
+	"dark": "ESAFE Dark, near-black navy with a bright blue accent",
 	"emerald": "Emerald, dark green with teal and lime accents",
 	"midnight": "Midnight, deep indigo dark with a periwinkle accent",
 	"sand": "Sand, warm beige light with ochre and olive",
@@ -701,7 +701,7 @@ def copilot(
 		)
 
 	plan_prompt = (
-		"You are the copilot inside Lumen Reports, a dashboard studio for Frappe and ERPNext. "
+		"You are the copilot inside ESAFE REPORT, a dashboard studio for Frappe and ERPNext. "
 		"The person is editing the dashboard below. Turn their message into a short reply and a "
 		"list of operations that the studio will apply once they confirm.\n"
 		f"Today's date is {frappe.utils.nowdate()}.\n\n"
