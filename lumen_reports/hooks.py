@@ -2,12 +2,12 @@
 # SPDX-License-Identifier: LicenseRef-Lumen-Proprietary
 # Proprietary and confidential. See license.txt. "Lumen Reports" is a trademark of Lumen Solutions.
 app_name = "lumen_reports"
-app_title = "ESAFE REPORT"
+app_title = "EAAFE BLABS REPORT SOLUTIONS"
 app_publisher = "Esafe (PVT) LTD"
-app_description = "ESAFE REPORT — live sales dashboards and reporting connected to ESAFE POS"
+app_description = "EAAFE BLABS REPORT SOLUTIONS — live sales dashboards and reporting connected to ESAFE POS"
 app_email = "hello@esafe.lk"
 app_license = "Proprietary"
-app_logo_url = "/assets/lumen_reports/logo/esafe.png"
+app_logo_url = "/assets/lumen_reports/logo/report-solutions.png"
 required_apps = []  # ERPNext optional; supports Frappe v15 and v16 (see pyproject.toml)
 
 # Apps

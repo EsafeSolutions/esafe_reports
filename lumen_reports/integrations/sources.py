@@ -137,7 +137,7 @@ def _registry() -> dict:
 		except Exception:
 			# one app's broken hook must not hide every other app's reports
 			frappe.log_error(
-				title="ESAFE REPORT: a report source could not be read",
+				title="EAAFE BLABS REPORT SOLUTIONS: a report source could not be read",
 				message=f"{HOOK}: {path}",
 			)
 			continue
@@ -265,7 +265,7 @@ def run_report(key: str, filters=None) -> dict:
 	if not _may_reach(source):
 		return _refusal(
 			"needs_role",
-			_("You need ESAFE REPORT access to see this. Ask your administrator for restricted reporting access."),
+			_("You need EAAFE BLABS REPORT SOLUTIONS access to see this. Ask your administrator for restricted reporting access."),
 		)
 
 	if not _allowed(source):

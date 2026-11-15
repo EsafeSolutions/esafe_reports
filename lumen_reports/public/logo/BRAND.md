@@ -1,6 +1,10 @@
-# Lumen Reports — Logo Kit
+# EAAFE BLABS REPORT SOLUTIONS
 
-Product logo for **Lumen Reports**, the analytics & dashboards app for ERPNext.
+`report-solutions.png` is the app emblem used in the navigation, browser icon, and Frappe app launcher. The navigation pairs it with the product name EAAFE BLABS REPORT SOLUTIONS.
+
+## Legacy Lumen Reports logo kit
+
+The `png/` and `svg/` folders contain the original Lumen Reports logo kit.
 Part of the Lumen family: same 48-unit grid, same blue, same rounded geometry as the
 Lumen Solutions company mark and LumenPDF Studio — but its own object, the **axis**.
 

@@ -2,7 +2,7 @@
   <main class="pos-page">
     <div class="pos-intro">
       <div>
-        <div class="eyebrow">ESAFE REPORT / {{ t('POS connection') }}</div>
+        <div class="eyebrow">EAAFE BLABS REPORT SOLUTIONS / {{ t('POS connection') }}</div>
         <h1>{{ t('Your sales. The full picture.') }}</h1>
         <p>{{ t('Connect your POS to live sales reports, all in one place.') }}</p>
       </div>

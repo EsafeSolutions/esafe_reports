@@ -19,7 +19,7 @@ export default {
   Dark: 'داكن',
   Light: 'فاتح',
   Dashboards: 'اللوحات',
-  'ESAFE REPORT': 'ESAFE REPORT',
+  'EAAFE BLABS REPORT SOLUTIONS': 'EAAFE BLABS REPORT SOLUTIONS',
   'Fast, live, beautiful dashboards for Frappe': 'لوحات سريعة ومباشرة وأنيقة لفرابيه',
   'New dashboard': 'لوحة جديدة',
   Live: 'مباشر',
@@ -292,8 +292,8 @@ export default {
   'One saved look. Every dashboard and every report follows it unless it sets its own.':
     'مظهر واحد محفوظ. كل لوحة وكل تقرير يتبعه ما لم يحدد مظهرا خاصا به.',
   'Back to dashboards': 'العودة إلى اللوحات',
-  'Only an ESAFE REPORT manager can change the visual identity. Ask your administrator.':
-    'تغيير الهوية البصرية متاح لمدير ESAFE REPORT فقط. تواصل مع مدير النظام.',
+  'Only an EAAFE BLABS REPORT SOLUTIONS manager can change the visual identity. Ask your administrator.':
+    'تغيير الهوية البصرية متاح لمدير EAAFE BLABS REPORT SOLUTIONS فقط. تواصل مع مدير النظام.',
   'What a printed report says it comes from': 'ما يظهر في التقرير المطبوع كجهة إصدار',
   'Organization name': 'اسم المنشأة',
   'Blank uses the Company on this site': 'تركه فارغا يستخدم الشركة المعرفة في الموقع',
@@ -308,8 +308,8 @@ export default {
   'Pick colors from this image': 'استخراج الألوان من هذه الصورة',
   'Report footer line': 'سطر أسفل صفحة التقرير',
   'For example: Confidential, for internal use': 'مثال: سري، للاستخدام الداخلي',
-  'Printed in the middle of the page foot, beside the ESAFE REPORT credit.':
-    'يطبع في منتصف أسفل الصفحة، بجانب حقوق ESAFE REPORT.',
+  'Printed in the middle of the page foot, beside the EAAFE BLABS REPORT SOLUTIONS credit.':
+    'يطبع في منتصف أسفل الصفحة، بجانب حقوق EAAFE BLABS REPORT SOLUTIONS.',
   'Colors found': 'الألوان المستخرجة',
   'Chosen by AI from your identity': 'اختارها الذكاء الاصطناعي من هويتك',
   'Measured from the image': 'مقاسة من الصورة',
@@ -344,8 +344,8 @@ export default {
   'What does this dashboard show?': 'ماذا تعرض هذه اللوحة؟',
   'Live updates': 'التحديث المباشر',
   'Who can see it': 'من يمكنه رؤيتها',
-  'Empty means everyone with ESAFE REPORT access. Add roles to restrict it. Each viewer still only sees the data their own permissions allow.':
-    'تركها فارغة يعني أنها متاحة لكل من لديه صلاحية الدخول إلى ESAFE REPORT. أضف أدوارا لتقييدها. يرى كل مشاهد البيانات التي تسمح بها صلاحياته فقط.',
+  'Empty means everyone with EAAFE BLABS REPORT SOLUTIONS access. Add roles to restrict it. Each viewer still only sees the data their own permissions allow.':
+    'تركها فارغة يعني أنها متاحة لكل من لديه صلاحية الدخول إلى EAAFE BLABS REPORT SOLUTIONS. أضف أدوارا لتقييدها. يرى كل مشاهد البيانات التي تسمح بها صلاحياته فقط.',
   'Add role…': 'إضافة دور…',
   'Add person…': 'إضافة شخص…',
   'To give someone only this dashboard, ask your administrator to grant restricted reporting access and add them here. Restricted viewers see nothing except dashboards that name them.':
@@ -460,8 +460,8 @@ export default {
   // ---- ask your data
   'Ask your data anything': 'اسأل بياناتك عن أي شيء',
   'AI settings': 'إعدادات الذكاء الاصطناعي',
-  "Describe the report you want. It is built with the ESAFE REPORT engine, using only data you are permitted to see. Keep it as a one-off answer or pin it to a dashboard.":
-    'صف التقرير الذي تريده. يبنى بمحرك ESAFE REPORT باستخدام البيانات المسموح لك بالاطلاع عليها فقط. احتفظ به إجابة لمرة واحدة أو ثبته في لوحة.',
+  "Describe the report you want. It is built with the EAAFE BLABS REPORT SOLUTIONS engine, using only data you are permitted to see. Keep it as a one-off answer or pin it to a dashboard.":
+    'صف التقرير الذي تريده. يبنى بمحرك EAAFE BLABS REPORT SOLUTIONS باستخدام البيانات المسموح لك بالاطلاع عليها فقط. احتفظ به إجابة لمرة واحدة أو ثبته في لوحة.',
   'Using your personal key': 'يستخدم مفتاحك الشخصي',
   'Using the site-wide shared key': 'يستخدم مفتاح الموقع المشترك',
   'Connect a Gemini API key': 'اربط مفتاح Gemini',

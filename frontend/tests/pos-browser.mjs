@@ -14,7 +14,7 @@ await mkdir(outputDir, { recursive: true })
 const html = (await readFile(path.join(root, 'lumen_reports/www/lumen.html'), 'utf8'))
   .replace(/<script>\s*\{% for key in boot %\}[\s\S]*?<\/script>/, '<script>window.csrf_token="test-csrf";</script>')
 const ready = {
-  contract: 3, product: 'ESAFE REPORT', reports_api: true, pos_installed: true,
+  contract: 3, product: 'EAAFE BLABS REPORT SOLUTIONS', reports_api: true, pos_installed: true,
   can_read_source: true, dashboard_exists: true, can_view: true, can_create: true,
   reason: null, license: 'licensed', slug: 'lumenpos-sales',
   url: '/lumen/dashboard/lumenpos-sales', embed_url: '/lumen/embed/lumenpos-sales',
@@ -71,7 +71,10 @@ try {
   page.on('pageerror', err => errors.push(err.message))
   await page.goto(`${origin}/esafe-report/pos`)
   await page.getByRole('heading', { name: 'Connect your sales dashboard', exact: true }).waitFor()
-  assert.equal(await page.title(), 'ESAFE REPORT')
+  assert.equal(await page.title(), 'EAAFE BLABS REPORT SOLUTIONS')
+  const wordmark = page.getByRole('link', { name: 'EAAFE BLABS REPORT SOLUTIONS', exact: true })
+  assert.ok(await wordmark.isVisible())
+  await wordmark.locator('img').evaluate(img => img.decode())
   await page.screenshot({ path: path.join(outputDir, 'esafe-report-desktop.png'), fullPage: true })
   refuseSetup = true
   await page.getByRole('button', { name: 'Set up sales dashboard' }).click()
@@ -105,6 +108,7 @@ try {
   await page.getByRole('heading', { name: 'Your sales dashboard is ready' }).waitFor()
 
   await page.setViewportSize({ width: 390, height: 844 })
+  assert.ok(await wordmark.isVisible())
   await page.screenshot({ path: path.join(outputDir, 'esafe-report-mobile.png'), fullPage: true })
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
   await page.getByRole('button', { name: 'Dark', exact: true }).click()

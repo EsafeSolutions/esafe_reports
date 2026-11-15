@@ -167,11 +167,9 @@ body {
   gap: 11px;
   font-weight: 800;
   font-size: 17px;
-  white-space: nowrap;
   color: #ffffff;
   text-decoration: none;
 }
-/* Use the existing ESAFE mark without recoloring it. */
 .brand .tile {
   width: 36px;
   height: 36px;
@@ -180,18 +178,14 @@ body {
   flex: none;
   display: block;
 }
-.brand .wm b {
-  color: #4ed8cb;
-  font-weight: 800;
+.brand .wm {
+  line-height: 1.2;
 }
-.brand small {
+.brand .wm b {
   display: block;
-  font-family: var(--mono);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  color: #b4c8de;
-  margin-top: -2px;
+  color: #4ed8cb;
+  font-size: 0.72em;
+  letter-spacing: 0.08em;
 }
 .theme-btn {
   display: inline-flex;

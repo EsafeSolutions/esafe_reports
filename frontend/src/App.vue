@@ -8,10 +8,7 @@
         <div class="row">
           <router-link to="/" class="brand">
             <img class="tile" :src="appIcon" alt="" width="36" height="36" />
-            <span>
-              <span class="wm">ESAFE <b>REPORT</b></span>
-              <small>{{ t('ANALYTICS') }}</small>
-            </span>
+            <span class="wm" dir="ltr">EAAFE BLABS <b>REPORT SOLUTIONS</b></span>
           </router-link>
           <span class="sp" style="flex: 1"></span>
           <router-link to="/pos" class="theme-btn" style="text-decoration: none">{{ t('POS connection') }}</router-link>
@@ -85,7 +82,7 @@ const embed = computed(() => Boolean(route.meta.embed) || /^\/(?:lumen|esafe-rep
 
 // served by Frappe from the app's public folder, not bundled — bound rather than
 // a literal src so Vite doesn't try to resolve it at build time
-const appIcon = '/assets/lumen_reports/logo/esafe.png'
+const appIcon = '/assets/lumen_reports/logo/report-solutions.png'
 
 // unlicensed use should be visible rather than silent; a failure to check
 // must never keep the app from loading

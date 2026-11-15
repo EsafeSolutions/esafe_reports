@@ -701,7 +701,7 @@ def copilot(
 		)
 
 	plan_prompt = (
-		"You are the copilot inside ESAFE REPORT, a dashboard studio for Frappe and ERPNext. "
+		"You are the copilot inside EAAFE BLABS REPORT SOLUTIONS, a dashboard studio for Frappe and ERPNext. "
 		"The person is editing the dashboard below. Turn their message into a short reply and a "
 		"list of operations that the studio will apply once they confirm.\n"
 		f"Today's date is {frappe.utils.nowdate()}.\n\n"

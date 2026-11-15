@@ -47,7 +47,7 @@ class POSContractTests(unittest.TestCase):
         self.assertEqual(status["embed_url"], "/lumen/embed/lumenpos-sales")
         self.assertTrue(status["reports_api"])
         self.assertTrue(status["can_view"])
-        self.assertEqual(status["product"], "ESAFE REPORT")
+        self.assertEqual(status["product"], "EAAFE BLABS REPORT SOLUTIONS")
         self.assertTrue(status["pos_installed"])
         self.assertTrue(status["can_read_source"])
 

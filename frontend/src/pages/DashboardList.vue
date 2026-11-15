@@ -9,7 +9,7 @@
         {{ t('Dashboards') }}
       </div>
       <h1 style="font-size: 32px; font-weight: 800; letter-spacing: -0.03em; margin-top: 10px">
-        ESAFE REPORT
+        EAAFE BLABS REPORT SOLUTIONS
       </h1>
       <div class="flex items-end justify-between gap-4">
         <p style="color: var(--muted); margin-top: 6px">{{ t('Your business, in focus.') }}</p>
