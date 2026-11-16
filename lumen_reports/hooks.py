@@ -2,9 +2,9 @@
 # SPDX-License-Identifier: LicenseRef-Lumen-Proprietary
 # Proprietary and confidential. See license.txt. "Lumen Reports" is a trademark of Lumen Solutions.
 app_name = "lumen_reports"
-app_title = "BLABS REPORT"
+app_title = "Esafe BLABS"
 app_publisher = "Esafe (PVT) LTD"
-app_description = "BLABS REPORT — live sales dashboards and reporting connected to ESAFE POS"
+app_description = "Esafe BLABS — live sales dashboards and reporting connected to ESAFE POS"
 app_email = "hello@esafe.lk"
 app_license = "Proprietary"
 app_logo_url = "/assets/lumen_reports/logo/blabs-report.svg"

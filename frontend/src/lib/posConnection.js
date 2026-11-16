@@ -17,14 +17,14 @@ export function connectionState(status) {
 export const CONNECTION_MESSAGES = {
   loading: ['Checking your connection', 'Reading the reporting status from this site.'],
   ready: ['Your sales dashboard is ready', 'Open Insights → Sales dashboard in ESAFE POS to see your live reports.'],
-  pos_missing: ['Install ESAFE POS on this site', 'BLABS REPORT connects to ESAFE POS installed on the same Frappe site. Ask your site administrator to install the POS app here.'],
+  pos_missing: ['Install ESAFE POS on this site', 'Esafe BLABS connects to ESAFE POS installed on the same Frappe site. Ask your site administrator to install the POS app here.'],
   needs_erpnext: ['ERPNext is required', 'Install ERPNext on this site to report on POS invoices.'],
   frontend_missing: ['The report interface needs a build', 'Ask your site administrator to build the reporting app, then check again.'],
   not_set_up: ['Connect your sales dashboard', 'Create the dashboard once, then open it directly from Insights in ESAFE POS.'],
-  needs_role: ['Reporting access is required', 'Ask your administrator for restricted BLABS REPORT access and POS manager access.'],
+  needs_role: ['Reporting access is required', 'Ask your administrator for restricted Esafe BLABS access and POS manager access.'],
   not_in_audience: ['This dashboard is restricted', 'Ask the dashboard owner to include your user or POS manager role in its audience.'],
   needs_data_access: ['POS invoice access is required', 'Ask your administrator for read access to POS Invoice and the linked records used by the dashboard.'],
-  needs_setup_access: ['An administrator needs to set up reports', 'Ask a System Manager or a BLABS REPORT builder or manager to create the sales dashboard.'],
+  needs_setup_access: ['An administrator needs to set up reports', 'Ask a System Manager or an Esafe BLABS builder or manager to create the sales dashboard.'],
   license_expired: ['The reporting subscription has expired', 'Renew the reporting subscription before creating the dashboard. Existing dashboards remain readable.'],
 }
 
@@ -35,7 +35,7 @@ export async function readConnection() {
   if (!response.ok) throw new Error('Could not check the connection. Check that you are signed in and try again.')
   const body = await response.json()
   if (!body.message || body.message.contract !== 3 || !('pos_installed' in body.message)) {
-    throw new Error('Update BLABS REPORT on this site, then check the connection again.')
+    throw new Error('Update Esafe BLABS on this site, then check the connection again.')
   }
   return body.message
 }

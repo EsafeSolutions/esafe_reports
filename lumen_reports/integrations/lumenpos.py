@@ -369,7 +369,7 @@ def get_status():
 
 	return {
 		**_links(),
-		"product": "BLABS REPORT",
+		"product": "Esafe BLABS",
 		"pos_installed": "lumenpos" in frappe.get_installed_apps(),
 		"can_read_source": has_source and frappe.has_permission(SOURCE, "read"),
 		"license": licensing.get_status().get("status"),
@@ -400,13 +400,13 @@ def ensure_dashboard(lang: str | None = None):
 	if expired and not frappe.conf.get("developer_mode"):
 		return _refusal(
 			"license_expired",
-			_("The BLABS REPORT subscription on this site has lapsed. Renew it to set up Insights."),
+			_("The Esafe BLABS subscription on this site has lapsed. Renew it to set up Insights."),
 		)
 	if not frappe.has_permission("Lumen Dashboard", "create"):
 		return _refusal(
 			"not_permitted",
 			_(
-				"Setting up Insights needs a BLABS REPORT builder, manager or System Manager. "
+				"Setting up Insights needs an Esafe BLABS builder, manager or System Manager. "
 				"Ask an administrator to open Insights once."
 			),
 		)

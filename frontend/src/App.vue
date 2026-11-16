@@ -8,7 +8,7 @@
         <div class="row">
           <router-link to="/" class="brand">
             <img class="tile" :src="appIcon" alt="" width="36" height="36" />
-            <span dir="ltr">BLABS REPORT</span>
+            <span dir="ltr">Esafe BLABS</span>
           </router-link>
           <span class="sp" style="flex: 1"></span>
           <router-link to="/pos" class="theme-btn" style="text-decoration: none">{{ t('POS connection') }}</router-link>

@@ -192,7 +192,7 @@ def can_manage() -> bool:
 def _require_manager():
 	if not can_manage():
 		frappe.throw(
-			_("Only a BLABS REPORT manager can change the visual identity."),
+			_("Only an Esafe BLABS manager can change the visual identity."),
 			frappe.PermissionError,
 		)
 

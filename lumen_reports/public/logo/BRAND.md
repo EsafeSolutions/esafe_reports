@@ -1,6 +1,6 @@
-# BLABS REPORT
+# Esafe BLABS
 
-`blabs-report.svg` is the app emblem used in the navigation, browser icon, and Frappe app launcher. The navigation pairs it with the product name BLABS REPORT.
+`blabs-report.svg` is the app emblem used in the navigation, browser icon, and Frappe app launcher. The navigation pairs it with the product name Esafe BLABS.
 
 ## Legacy Lumen Reports logo kit
 

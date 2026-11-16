@@ -19,12 +19,12 @@ APP_ROLES = {
 
 def get_context(context):
 	if frappe.session.user == "Guest":
-		frappe.throw(frappe._("Please login to access BLABS REPORT"), frappe.PermissionError)
+		frappe.throw(frappe._("Please login to access Esafe BLABS"), frappe.PermissionError)
 	if frappe.session.user != "Administrator" and not (APP_ROLES & set(frappe.get_roles())):
 		frappe.throw(
 			frappe._(
-				"You don't have access to BLABS REPORT yet. Ask your administrator for "
-				"BLABS REPORT viewer, builder or manager access."
+				"You don't have access to Esafe BLABS yet. Ask your administrator for "
+				"Esafe BLABS viewer, builder or manager access."
 			),
 			frappe.PermissionError,
 		)

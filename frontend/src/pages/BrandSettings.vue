@@ -12,7 +12,7 @@
     </div>
 
     <p v-if="!brand.can_manage" class="err">
-      {{ t('Only a BLABS REPORT manager can change the visual identity. Ask your administrator.') }}
+      {{ t('Only an Esafe BLABS manager can change the visual identity. Ask your administrator.') }}
     </p>
 
     <div v-else class="cols">
@@ -79,7 +79,7 @@
                 :placeholder="t('For example: Confidential, for internal use')"
                 maxlength="120"
               />
-              <p class="hint">{{ t('Printed in the middle of the page foot, beside the BLABS REPORT credit.') }}</p>
+              <p class="hint">{{ t('Printed in the middle of the page foot, beside the Esafe BLABS credit.') }}</p>
             </div>
 
             <div class="lfield">
@@ -167,7 +167,7 @@
               <div class="ft">
                 <span class="credit" dir="ltr">
                   <img :src="appIcon" alt="" width="12" height="12" />
-                  Created by BLABS REPORT
+                  Created by Esafe BLABS
                 </span>
                 <span v-if="form.footer_text" class="own" dir="auto">{{ form.footer_text }}</span>
                 <span class="pg mono" dir="ltr">1 / 3</span>

@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="lumen_reports/public/logo/blabs-report.svg" width="76" height="76" alt="BLABS REPORT" />
+<img src="lumen_reports/public/logo/blabs-report.svg" width="76" height="76" alt="Esafe BLABS" />
 
-# BLABS REPORT
+# Esafe BLABS
 
 **Live sales dashboards and reports connected to ESAFE POS.**
 
@@ -22,12 +22,12 @@ remain in place. Role names and API identifiers below are the existing technical
 
 ---
 
-## Why BLABS REPORT
+## Why Esafe BLABS
 
 Frappe ships capable but plain reporting. Getting a straight answer usually means
 exporting to a spreadsheet or waiting on a custom script report.
 
-BLABS REPORT is a standalone Vue 3 single-page app served at `/esafe-report` (also available at `/lumen`). It is **not** a BI
+Esafe BLABS is a standalone Vue 3 single-page app served at `/esafe-report` (also available at `/lumen`). It is **not** a BI
 suite for analysts. It is an operational dashboard layer for the people who run the
 business, built on the doctypes you already have.
 
@@ -37,7 +37,7 @@ business, built on the doctypes you already have.
   place over websockets. No refresh button.
 - **No-code studio.** Start from a template or a blank canvas, edit any widget in a
   side inspector with a live preview, and drag and resize on a 12-column grid.
-- **Permission-safe by construction.** BLABS REPORT never runs raw SQL. Every widget stores
+- **Permission-safe by construction.** Esafe BLABS never runs raw SQL. Every widget stores
   a query definition that the server compiles through Frappe's permission layer,
   checking read access on the base doctype *and* every joined doctype. PDF reports
   and scheduled emails are rendered with the same checks, as the person reading them.
@@ -74,11 +74,11 @@ business, built on the doctypes you already have.
 - **Visual identity**, site-wide, at `/lumen/brand`. One saved look every dashboard
   and every report follows unless it sets its own: organization name, logo,
   letterhead, an own line in the middle of the page foot (beside the "Created by
-  BLABS REPORT" credit, which always prints), the two faces a report prints in,
+  Esafe BLABS" credit, which always prints), the two faces a report prints in,
   and a default theme. A
   dashboard overrides it field by field, so changing the identity restyles
   everything that never overrode that field. Upload the identity as an image and
-  BLABS REPORT reads the colors out of it, with the palette measured from the pixels and,
+  Esafe BLABS reads the colors out of it, with the palette measured from the pixels and,
   when a Gemini key is set, the primary and secondary picked by the AI. Nothing is
   applied until the person confirms it. Needs Lumen Manager or System Manager.
 - **Two report fonts, one Latin and one Arabic.** A Latin family carries no Arabic
@@ -100,7 +100,7 @@ business, built on the doctypes you already have.
   executive summary, or explain what stands out. Every proposal is shown as a list of
   changes first, and applying it is a single undo step. It replies in the user's
   language.
-- **Ask AI** at `/lumen/ask`. Describe a report in plain English and BLABS REPORT generates
+- **Ask AI** at `/lumen/ask`. Describe a report in plain English and Esafe BLABS generates
   validated widgets with a short written analysis, to save as a new dashboard or add
   to an existing one. It asks a clarifying question when a request is genuinely
   ambiguous, and surfaces the assumptions it made as one-tap refinements.
@@ -140,7 +140,7 @@ business, built on the doctypes you already have.
 ## Requirements
 
 - Frappe Framework **v14**, **v15** or **v16**
-- Works alongside ERPNext, or on any custom app. BLABS REPORT reads whatever doctypes exist.
+- Works alongside ERPNext, or on any custom app. Esafe BLABS reads whatever doctypes exist.
 - The AI features are optional and need your own Google Gemini API key
 - **PDF reports and scheduled delivery need v15 or v16.** They render with
   WeasyPrint, which ships with those versions but not v14, so on v14 the Report
@@ -175,7 +175,7 @@ yarn build    # production build, served at /lumen
 
 ## Permissions
 
-BLABS REPORT ships four roles (created on install):
+Esafe BLABS ships four roles (created on install):
 
 | Role | Can do |
 |---|---|
@@ -189,7 +189,7 @@ Three independent layers:
 1. **App access.** `/lumen` requires one of the roles above (System Managers always
    have access).
 2. **Dashboard visibility.** Drafts are private to their owner. Published dashboards
-   are visible to everyone with BLABS REPORT access, unless the dashboard names an audience
+   are visible to everyone with Esafe BLABS access, unless the dashboard names an audience
    ("Who can see it" in settings): roles, specific people, or both. Restricted
    Viewers invert the default: they see nothing except dashboards that name them.
 3. **Data.** Every widget query runs through Frappe's permission layer for the
@@ -211,7 +211,7 @@ charge for it, sits with the Google account that owns the key.
    key** shared by everyone (a personal key always takes priority).
 
 Keys are stored **encrypted** in the site database, never returned to the browser and
-never included in error messages. The model only ever emits BLABS REPORT's query
+never included in error messages. The model only ever emits Esafe BLABS's query
 specification, or the copilot's list of operations, and both are executed through the
 same permission-aware engine as every other widget. The AI never touches the
 database directly.
@@ -244,7 +244,7 @@ rows.
 
 ## ESAFE POS Insights (integration)
 
-ESAFE POS can show a POS sales dashboard from BLABS REPORT inside the POS. The two
+ESAFE POS can show a POS sales dashboard from Esafe BLABS inside the POS. The two
 apps meet only at runtime, through the calls below, and neither imports the other.
 
 | Call | What it does |
@@ -255,7 +255,7 @@ apps meet only at runtime, through the calls below, and neither imports the othe
 - **Embed** at `/lumen/embed/<slug>`, optionally with `?lang=en|ar` and
   `?theme=light|dark`. It shows the dashboard with its filters and live updates,
   without the app header, navigation or edit controls.
-- **Access** is unchanged. The viewer needs a BLABS REPORT role, and **Lumen Restricted
+- **Access** is unchanged. The viewer needs an Esafe BLABS role, and **Lumen Restricted
   Viewer** is enough: the dashboard names `LumenPOS Manager` as its audience, so that
   viewer sees this dashboard and nothing else. The numbers still need read permission
   on POS Invoice.
@@ -270,8 +270,8 @@ apps meet only at runtime, through the calls below, and neither imports the othe
 Some numbers cannot be written as a dashboard widget. The cost of goods sold reads a
 stock ledger, expands a bundle into its parts and estimates what has not been posted
 yet; a cash count compares a drawer against a shift. That knowledge belongs to the app
-that owns the subject, and BLABS REPORT runs no raw SQL by design. So the owning app
-keeps the arithmetic and registers it here, and BLABS REPORT becomes the way it is
+that owns the subject, and Esafe BLABS runs no raw SQL by design. So the owning app
+keeps the arithmetic and registers it here, and Esafe BLABS becomes the way it is
 reached: it holds the entry point, the licence state, the role gate and the filter
 contract, and the owning app's own permission rule is asked before its code runs.
 
@@ -311,13 +311,13 @@ def sources():
   with the wrong arguments.
 - **The owning app decides who may see it.** Its `capability` is called before its
   `method`, and a rule that raises counts as a refusal.
-- **A viewer needs a BLABS REPORT role, unless the definition names roles of its own.**
-  `roles` lists roles that stand in for a BLABS REPORT role **for that report only**: a shop
+- **A viewer needs an Esafe BLABS role, unless the definition names roles of its own.**
+  `roles` lists roles that stand in for an Esafe BLABS role **for that report only**: a shop
   manager who runs the till should not have to be given a reporting role as well to
   read the till's own numbers. Those roles open nothing else, not a dashboard, not the
   studio, not another app's report, and the owning app's `capability` still decides.
-  Without `roles`, a BLABS REPORT role is required, which is what lets a host app show an
-  "install BLABS REPORT" card instead of a report.
+  Without `roles`, an Esafe BLABS role is required, which is what lets a host app show an
+  "install Esafe BLABS" card instead of a report.
 - **The licence is reported, never enforced.** `list_reports` returns the licence
   state so a host app can show a banner, and a report still runs: reads are not
   blocked here, the same way they are not blocked anywhere else in this app.

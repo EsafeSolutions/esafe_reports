@@ -73,7 +73,7 @@ BASELINE = "#ccd3e0"
 # printed at the foot of every page, in both languages, on every site. An
 # organization's own footer line is set beside it, never in place of it:
 # removing the credit is a licensing conversation, not a setting.
-CREDIT = "Created by BLABS REPORT"
+CREDIT = "Created by Esafe BLABS"
 _CREDIT_ICON = Path(__file__).with_name("public") / "logo" / "blabs-report.svg"
 
 ARABIC_MONTHS = [
