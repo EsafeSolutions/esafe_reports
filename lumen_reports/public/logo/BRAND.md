@@ -1,6 +1,6 @@
-# EAAFE BLABS REPORT SOLUTIONS
+# BLABS REPORT
 
-`report-solutions.png` is the app emblem used in the navigation, browser icon, and Frappe app launcher. The navigation pairs it with the product name EAAFE BLABS REPORT SOLUTIONS.
+`blabs-report.svg` is the app emblem used in the navigation, browser icon, and Frappe app launcher. The navigation pairs it with the product name BLABS REPORT.
 
 ## Legacy Lumen Reports logo kit
 

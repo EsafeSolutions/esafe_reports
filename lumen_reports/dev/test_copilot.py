@@ -27,7 +27,7 @@ class _Fake:
 
 	def __call__(self, prompt, key, model):
 		self.prompts.append(prompt)
-		if "You are the copilot inside EAAFE BLABS REPORT SOLUTIONS" in prompt:
+		if "You are the copilot inside BLABS REPORT" in prompt:
 			return self.plan
 		if "Available doctypes" in prompt:
 			return {"doctypes": ["Sales Invoice"]}

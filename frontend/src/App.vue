@@ -8,7 +8,7 @@
         <div class="row">
           <router-link to="/" class="brand">
             <img class="tile" :src="appIcon" alt="" width="36" height="36" />
-            <span class="wm" dir="ltr">EAAFE BLABS <b>REPORT SOLUTIONS</b></span>
+            <span dir="ltr">BLABS REPORT</span>
           </router-link>
           <span class="sp" style="flex: 1"></span>
           <router-link to="/pos" class="theme-btn" style="text-decoration: none">{{ t('POS connection') }}</router-link>
@@ -69,7 +69,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { call } from 'frappe-ui'
 import { theme, toggleTheme, applyTheme } from '@/lib/theme'
-import { brand } from '@/lib/brand'
+import { appIcon, brand } from '@/lib/brand'
 import { applyLang, lang, setLang, t } from '@/lib/i18n'
 
 applyTheme()
@@ -79,10 +79,6 @@ applyLang()
 // the first paint, before the router has resolved the route
 const route = useRoute()
 const embed = computed(() => Boolean(route.meta.embed) || /^\/(?:lumen|esafe-report)\/embed\//.test(window.location.pathname))
-
-// served by Frappe from the app's public folder, not bundled — bound rather than
-// a literal src so Vite doesn't try to resolve it at build time
-const appIcon = '/assets/lumen_reports/logo/report-solutions.png'
 
 // unlicensed use should be visible rather than silent; a failure to check
 // must never keep the app from loading

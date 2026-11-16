@@ -169,9 +169,10 @@ def run():
 		out["print_names_the_organization"] = "Lumen Test Co" in markup
 		out["print_uses_the_footer_line"] = 'content: "Lumen Test Co · Confidential"' in markup
 		# the credit is not a setting: an organization's own line sits beside it
-		out["print_always_credits_lumen"] = f'content: "{report.CREDIT}"' in markup
+		credit = f'") " {report.CREDIT}";'
+		out["print_always_credits_product"] = "content: url(\"data:image/svg+xml;base64," in markup and credit in markup
 		bare = report._css({"lang": "en", "paper": "A4", "page_numbers": 1}, palette, "")
-		out["credit_prints_without_an_own_line"] = f'content: "{report.CREDIT}"' in bare
+		out["credit_prints_without_an_own_line"] = credit in bare
 		out["no_middle_slot_without_an_own_line"] = "@bottom-center" not in bare
 		out["print_underlines_in_the_brand_colour"] = "border-bottom: 2pt solid #c1121f" in markup
 		# a board with its own colour still prints in it

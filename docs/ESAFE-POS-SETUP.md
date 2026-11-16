@@ -1,6 +1,6 @@
-# EAAFE BLABS REPORT SOLUTIONS + ESAFE POS
+# BLABS REPORT + ESAFE POS
 
-EAAFE BLABS REPORT SOLUTIONS is the branded reporting interface in this repository. It shares the
+BLABS REPORT is the branded reporting interface in this repository. It shares the
 POS site's Frappe session and reads its submitted POS invoices. No remote database
 connection or browser API secret is required.
 
@@ -62,7 +62,7 @@ The POS continues to call `lumen_reports.integrations.lumenpos.get_status` (GET)
 `lumen_reports.integrations.lumenpos.ensure_dashboard` (POST). Contract version 3,
 dashboard slug `lumenpos-sales`, and registered-report endpoints are unchanged.
 Status now also returns `product`, `pos_installed`, and `can_read_source` for the
-EAAFE BLABS REPORT SOLUTIONS connection screen. These fields do not widen access.
+BLABS REPORT connection screen. These fields do not widen access.
 
 Both `/esafe-report/...` and `/lumen/...` serve the same frontend. Existing POS embeds
 at `/lumen/embed/lumenpos-sales` keep working, including language and theme parameters.

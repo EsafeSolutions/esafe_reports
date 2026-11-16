@@ -12,9 +12,10 @@ const publicDir = path.join(root, 'lumen_reports/public')
 const outputDir = path.join(root, '.qa')
 await mkdir(outputDir, { recursive: true })
 const html = (await readFile(path.join(root, 'lumen_reports/www/lumen.html'), 'utf8'))
-  .replace(/<script>\s*\{% for key in boot %\}[\s\S]*?<\/script>/, '<script>window.csrf_token="test-csrf";</script>')
+  .replace(/<script>\s*\{% for key in boot %\}[\s\S]*?<\/script>/, '<script>window.csrf_token="test-csrf";window.lumen_brand={can_manage:true};</script>')
+const iconUrl = '/assets/lumen_reports/logo/blabs-report.svg'
 const ready = {
-  contract: 3, product: 'EAAFE BLABS REPORT SOLUTIONS', reports_api: true, pos_installed: true,
+  contract: 3, product: 'BLABS REPORT', reports_api: true, pos_installed: true,
   can_read_source: true, dashboard_exists: true, can_view: true, can_create: true,
   reason: null, license: 'licensed', slug: 'lumenpos-sales',
   url: '/lumen/dashboard/lumenpos-sales', embed_url: '/lumen/embed/lumenpos-sales',
@@ -71,10 +72,13 @@ try {
   page.on('pageerror', err => errors.push(err.message))
   await page.goto(`${origin}/esafe-report/pos`)
   await page.getByRole('heading', { name: 'Connect your sales dashboard', exact: true }).waitFor()
-  assert.equal(await page.title(), 'EAAFE BLABS REPORT SOLUTIONS')
-  const wordmark = page.getByRole('link', { name: 'EAAFE BLABS REPORT SOLUTIONS', exact: true })
+  assert.equal(await page.title(), 'BLABS REPORT')
+  const wordmark = page.getByRole('link', { name: 'BLABS REPORT', exact: true })
   assert.ok(await wordmark.isVisible())
-  await wordmark.locator('img').evaluate(img => img.decode())
+  const icon = wordmark.locator('img')
+  assert.equal(await icon.getAttribute('src'), iconUrl)
+  await icon.evaluate(img => img.decode())
+  assert.equal(await page.locator('link[rel="icon"]').getAttribute('href'), iconUrl)
   await page.screenshot({ path: path.join(outputDir, 'esafe-report-desktop.png'), fullPage: true })
   refuseSetup = true
   await page.getByRole('button', { name: 'Set up sales dashboard' }).click()
@@ -117,6 +121,11 @@ try {
   await page.goto(`${origin}/lumen/pos`)
   await page.getByRole('heading', { name: 'Your sales dashboard is ready' }).waitFor()
   assert.equal(await page.getByRole('link', { name: 'View sales dashboard' }).getAttribute('href'), '/lumen/dashboard/lumenpos-sales')
+  await page.getByRole('link', { name: 'Identity', exact: true }).click()
+  const credit = page.getByText('Created by BLABS REPORT', { exact: true })
+  await credit.waitFor()
+  assert.equal(await credit.locator('img').getAttribute('src'), iconUrl)
+  await credit.locator('img').evaluate(img => img.decode())
   assert.deepEqual(errors, [])
   console.log('PASS: production routes, setup success/refusal, CSRF, permission/error/retry states, desktop/mobile, dark mode, no page errors.')
   console.log(`Screenshots: ${outputDir}`)

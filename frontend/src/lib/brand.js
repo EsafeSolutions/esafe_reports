@@ -12,6 +12,8 @@
 import { computed, reactive } from 'vue'
 import { call } from 'frappe-ui'
 
+export const appIcon = '/assets/lumen_reports/logo/blabs-report.svg'
+
 export const brand = reactive({
   organization: '',
   logo: '',

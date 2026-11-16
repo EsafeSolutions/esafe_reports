@@ -20,11 +20,13 @@ Two rules shape the markup:
   be used to make the server request an internal address.
 """
 
+import base64
 import datetime
 import html
 import math
 import os
 import re
+from pathlib import Path
 
 import frappe
 from frappe import _
@@ -71,7 +73,8 @@ BASELINE = "#ccd3e0"
 # printed at the foot of every page, in both languages, on every site. An
 # organization's own footer line is set beside it, never in place of it:
 # removing the credit is a licensing conversation, not a setting.
-CREDIT = "Created by EAAFE BLABS REPORT SOLUTIONS"
+CREDIT = "Created by BLABS REPORT"
+_CREDIT_ICON = Path(__file__).with_name("public") / "logo" / "blabs-report.svg"
 
 ARABIC_MONTHS = [
 	"يناير",
@@ -988,6 +991,7 @@ def _css(options, palette, footer="", fonts=None):
 			f'font-family: "{latin}", "{arabic}"; font-size: 8pt; color: #98a1b2; }}'
 		)
 	brand_side = "right" if lang == "ar" else "left"
+	icon_data = base64.b64encode(_CREDIT_ICON.read_bytes()).decode("ascii")
 	# the gap between a bar's label and the bar sits on the page's own side;
 	# a logical padding would follow an English label's direction instead
 	bar_gap_side = "left" if lang == "ar" else "right"
@@ -996,7 +1000,13 @@ def _css(options, palette, footer="", fonts=None):
 @page {{
   size: {page_size};
   margin: 15mm 14mm 17mm;
-  @bottom-{brand_side} {{ content: "{CREDIT}"; font-family: "{latin}", "{arabic}"; font-size: 8pt; color: #98a1b2; }}
+  @bottom-{brand_side} {{
+    content: url("data:image/svg+xml;base64,{icon_data}") " {CREDIT}";
+    direction: ltr;
+    font-family: "{latin}", "{arabic}";
+    font-size: 8pt;
+    color: #98a1b2;
+  }}
   {own_line}
   {numbers}
 }}

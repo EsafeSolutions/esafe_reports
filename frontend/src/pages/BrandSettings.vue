@@ -12,7 +12,7 @@
     </div>
 
     <p v-if="!brand.can_manage" class="err">
-      {{ t('Only an EAAFE BLABS REPORT SOLUTIONS manager can change the visual identity. Ask your administrator.') }}
+      {{ t('Only a BLABS REPORT manager can change the visual identity. Ask your administrator.') }}
     </p>
 
     <div v-else class="cols">
@@ -79,7 +79,7 @@
                 :placeholder="t('For example: Confidential, for internal use')"
                 maxlength="120"
               />
-              <p class="hint">{{ t('Printed in the middle of the page foot, beside the EAAFE BLABS REPORT SOLUTIONS credit.') }}</p>
+              <p class="hint">{{ t('Printed in the middle of the page foot, beside the BLABS REPORT credit.') }}</p>
             </div>
 
             <div class="lfield">
@@ -165,7 +165,10 @@
                 <i v-for="(color, i) in previewPalette" :key="i" :style="{ background: color }"></i>
               </div>
               <div class="ft">
-                <span>Created by EAAFE BLABS REPORT SOLUTIONS</span>
+                <span class="credit" dir="ltr">
+                  <img :src="appIcon" alt="" width="12" height="12" />
+                  Created by BLABS REPORT
+                </span>
                 <span v-if="form.footer_text" class="own" dir="auto">{{ form.footer_text }}</span>
                 <span class="pg mono" dir="ltr">1 / 3</span>
               </div>
@@ -196,7 +199,7 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 import ThemePanel from '@/components/builder/ThemePanel.vue'
-import { brand, extractColors, saveIdentity, serverMessage, uploadImage } from '@/lib/brand'
+import { appIcon, brand, extractColors, saveIdentity, serverMessage, uploadImage } from '@/lib/brand'
 import { DEFAULT_THEME, findPreset, themeVars } from '@/lib/dashboardTheme'
 import { t } from '@/lib/i18n'
 import '@/components/builder/controls.css'
@@ -580,6 +583,12 @@ async function save() {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rprev .ft .credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   white-space: nowrap;
 }
 .rprev .ft .pg {
