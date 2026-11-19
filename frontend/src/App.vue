@@ -12,7 +12,7 @@
           </router-link>
           <span class="sp" style="flex: 1"></span>
           <router-link to="/pos" class="theme-btn" style="text-decoration: none">{{ t('POS connection') }}</router-link>
-          <router-link to="/ask" class="theme-btn" style="text-decoration: none; border-color: transparent; background: color-mix(in srgb, var(--blue) 10%, transparent); color: var(--blue)">
+          <router-link :to="{ name: 'AskAI', query: { mode: 'chat' } }" class="theme-btn" style="text-decoration: none; border-color: transparent; background: color-mix(in srgb, var(--blue) 10%, transparent); color: var(--blue)">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 3v2M12 19v2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M3 12h2M19 12h2M5.6 18.4 7 17M17 7l1.4-1.4" />
               <circle cx="12" cy="12" r="4" />
@@ -56,6 +56,10 @@
         </div>
       </div>
     </header>
+    <div v-if="availableVersion" class="update-bar">
+      <span role="status">{{ t('A new version of Esafe BLABS is ready.') }}</span>
+      <button type="button" class="lbtn sm" @click="reload()">{{ t('Refresh now') }}</button>
+    </div>
     <div v-if="licenseNotice" class="lic-bar">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" /><path d="M12 8v5M12 16.5v.01" /></svg>
       <span>{{ licenseNotice }}</span>
@@ -71,6 +75,7 @@ import { call } from 'frappe-ui'
 import { theme, toggleTheme, applyTheme } from '@/lib/theme'
 import { appIcon, brand } from '@/lib/brand'
 import { applyLang, lang, setLang, t } from '@/lib/i18n'
+import { useAppUpdate } from '@/lib/appUpdate'
 
 applyTheme()
 applyLang()
@@ -78,6 +83,7 @@ applyLang()
 // inside another app's page the host has its own header. The path check covers
 // the first paint, before the router has resolved the route
 const route = useRoute()
+const { availableVersion, reload } = useAppUpdate(route)
 const embed = computed(() => Boolean(route.meta.embed) || /^\/(?:lumen|esafe-report)\/embed\//.test(window.location.pathname))
 
 // unlicensed use should be visible rather than silent; a failure to check
@@ -96,6 +102,17 @@ watch(lang, loadNotice)
 </script>
 
 <style scoped>
+.update-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 14px;
+  padding: 8px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+  font-size: 13px;
+}
 .lic-bar {
   display: flex;
   align-items: center;

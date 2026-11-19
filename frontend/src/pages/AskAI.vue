@@ -4,20 +4,16 @@
 <template>
   <div class="mx-auto max-w-4xl px-6 py-10">
     <div class="mb-6">
-      <div class="mono eyebrow-line">
-        <span class="bar"></span>
-        {{ t('Ask AI') }}
-      </div>
       <div class="flex flex-wrap items-end justify-between gap-3">
         <h1 style="font-size: 30px; font-weight: 800; letter-spacing: -0.03em; margin-top: 8px">
-          {{ t('Ask your data anything') }}
+          {{ t(chatMode ? 'Ask AI' : 'Ask your data anything') }}
         </h1>
         <button v-if="status?.configured" class="lbtn sm" @click="showSettings = !showSettings">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1" /></svg>
           {{ t('AI settings') }}
         </button>
       </div>
-      <p style="color: var(--muted); margin-top: 4px; font-size: 14.5px">
+      <p v-if="!chatMode" style="color: var(--muted); margin-top: 4px; font-size: 14.5px">
         {{ t("Describe the report you want. It is built with the Esafe BLABS engine, using only data you are permitted to see. Keep it as a one-off answer or pin it to a dashboard.") }}
       </p>
       <span v-if="status?.configured" class="badge b-blue mt-2" style="margin-top: 8px">
@@ -25,6 +21,23 @@
         {{ status.source === 'user' ? t('Using your personal key') : t('Using the site-wide shared key') }}
         · <span dir="ltr">{{ status.model }}</span>
       </span>
+    </div>
+
+    <nav class="ai-modes" :aria-label="t('Ask AI')">
+      <router-link :to="{ name: 'AskAI', query: { mode: 'chat' } }" :class="{ selected: chatMode }" :aria-current="chatMode ? 'page' : undefined">
+        {{ t('Insights chat') }}
+      </router-link>
+      <router-link :to="{ name: 'AskAI' }" :class="{ selected: !chatMode }" :aria-current="!chatMode ? 'page' : undefined">
+        {{ t('Report builder') }}
+      </router-link>
+    </nav>
+
+    <div v-if="!status" class="panel ai-status">
+      <p v-if="loadingStatus" role="status">{{ t('Checking AI settings…') }}</p>
+      <template v-else>
+        <p role="alert">{{ t('Could not load AI settings.') }}</p>
+        <button class="lbtn sm" type="button" @click="loadStatus">{{ t('Try again') }}</button>
+      </template>
     </div>
 
     <!-- key setup -->
@@ -118,6 +131,9 @@
       </div>
     </div>
 
+    <InsightsChat v-if="status?.configured" v-show="chatMode" />
+
+    <template v-if="!chatMode">
     <!-- ask box -->
     <div v-if="status?.configured" class="panel" style="padding: 14px">
       <div class="flex items-center gap-2">
@@ -332,6 +348,7 @@
         <p v-if="pinError" style="font-size: 12.5px; color: var(--danger); margin-top: 6px" dir="auto">{{ pinError }}</p>
       </div>
     </template>
+    </template>
   </div>
 </template>
 
@@ -339,6 +356,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { call } from 'frappe-ui'
+import InsightsChat from '@/components/InsightsChat.vue'
 import ChartBody from '@/components/widgets/ChartBody.vue'
 import ChartVariants from '@/components/widgets/ChartVariants.vue'
 import TableBody from '@/components/widgets/TableBody.vue'
@@ -353,6 +371,7 @@ const EXAMPLES = [
 ]
 
 const status = ref(null)
+const loadingStatus = ref(true)
 const showSettings = ref(false)
 const keyInput = ref('')
 const modelInput = ref('gemini-2.5-flash')
@@ -396,18 +415,33 @@ function kpiIndex(i) {
 }
 
 const route = useRoute()
+const chatMode = computed(() => route.query.mode === 'chat')
 
-onMounted(async () => {
-  applyStatus(await call('lumen_reports.ai.get_ai_status'))
-  const list = await call('lumen_reports.api.get_dashboards')
-  dashboards.value = list.dashboards || []
-  // arriving from the create screen with a description already typed
-  const seeded = (route.query.q || '').toString().trim()
-  if (seeded) {
-    question.value = seeded
-    if (status.value?.configured) ask()
-  }
+onMounted(() => {
+  loadStatus()
+  call('lumen_reports.api.get_dashboards').then((list) => {
+    dashboards.value = list.dashboards || []
+  }).catch(() => {
+    dashboards.value = []
+  })
 })
+
+async function loadStatus() {
+  loadingStatus.value = true
+  try {
+    applyStatus(await call('lumen_reports.ai.get_ai_status'))
+    // The dashboard creation screen can open the builder with a prefilled question.
+    const seeded = (route.query.q || '').toString().trim()
+    if (seeded && !chatMode.value) {
+      question.value = seeded
+      if (status.value?.configured) ask()
+    }
+  } catch {
+    status.value = null
+  } finally {
+    loadingStatus.value = false
+  }
+}
 
 function applyStatus(next) {
   status.value = next
@@ -600,6 +634,30 @@ function reset() {
 </script>
 
 <style scoped>
+.ai-modes {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.ai-modes a {
+  padding: 9px 12px;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 650;
+}
+.ai-modes a.selected {
+  color: var(--blue);
+  border-color: currentColor;
+}
+.ai-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  font-size: 14px;
+}
 .eyebrow-line {
   font-size: 12.5px;
   letter-spacing: 0.1em;

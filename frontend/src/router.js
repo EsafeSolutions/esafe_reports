@@ -13,6 +13,7 @@ const routes = [
     path: '/',
     name: 'DashboardList',
     component: () => import('@/pages/DashboardList.vue'),
+    meta: { autoReload: true },
   },
   {
     path: '/new',
@@ -39,6 +40,7 @@ const routes = [
     name: 'DashboardView',
     component: () => import('@/pages/DashboardView.vue'),
     props: true,
+    meta: { autoReload: true },
   },
   {
     path: '/dashboard/:slug/edit',
@@ -59,7 +61,7 @@ const routes = [
     name: 'DashboardEmbed',
     component: () => import('@/pages/DashboardView.vue'),
     props: (route) => ({ slug: route.params.slug, embed: true }),
-    meta: { embed: true },
+    meta: { embed: true, autoReload: true },
   },
 ]
 

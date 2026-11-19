@@ -16,6 +16,8 @@ export default {
   // ---- app shell and lists
   ANALYTICS: 'تحليلات',
   'Ask AI': 'اسأل بياناتك',
+  'A new version of Esafe BLABS is ready.': 'يتوفر إصدار جديد من Esafe BLABS.',
+  'Refresh now': 'تحديث الآن',
   Dark: 'داكن',
   Light: 'فاتح',
   Dashboards: 'اللوحات',
@@ -459,6 +461,29 @@ export default {
 
   // ---- ask your data
   'Ask your data anything': 'اسأل بياناتك عن أي شيء',
+  'Insights chat': 'محادثة رؤى الأعمال',
+  'Report builder': 'منشئ التقارير',
+  'Checking AI settings…': 'جار التحقق من إعدادات الذكاء الاصطناعي…',
+  'Could not load AI settings.': 'تعذر تحميل إعدادات الذكاء الاصطناعي.',
+  'Try again': 'حاول مرة أخرى',
+  'Gemini analyzes aggregate results you have permission to see.': 'يحلل Gemini النتائج المجمعة التي لديك صلاحية الاطلاع عليها.',
+  'New chat': 'محادثة جديدة',
+  Conversation: 'المحادثة',
+  'What would you like to understand?': 'ما الذي تود فهمه؟',
+  'Ask about a metric, compare periods, or follow up on what changed.': 'اسأل عن مؤشر، أو قارن بين الفترات، أو تابع ما الذي تغير.',
+  'Compare POS sales this month and last month': 'قارن مبيعات نقاط البيع هذا الشهر بالشهر الماضي',
+  'Show sales by month this year': 'اعرض المبيعات حسب الشهر هذا العام',
+  'What is the total on overdue sales invoices?': 'ما إجمالي فواتير المبيعات المتأخرة؟',
+  You: 'أنت',
+  'Insights assistant': 'مساعد رؤى الأعمال',
+  'Data used ({0})': 'البيانات المستخدمة ({0})',
+  'Showing the first {0} groups.': 'يتم عرض أول {0} مجموعة.',
+  'Business question': 'سؤال عن الأعمال',
+  'Ask a business question…': 'اطرح سؤالا عن أعمالك…',
+  Send: 'إرسال',
+  'Could not send your question. Try again.': 'تعذر إرسال سؤالك. حاول مرة أخرى.',
+  "I couldn't verify an answer from the data you can access. Try naming the metric and date range.":
+    'تعذر التحقق من الإجابة باستخدام البيانات التي يمكنك الوصول إليها. حاول تحديد المؤشر والفترة الزمنية.',
   'AI settings': 'إعدادات الذكاء الاصطناعي',
   "Describe the report you want. It is built with the Esafe BLABS engine, using only data you are permitted to see. Keep it as a one-off answer or pin it to a dashboard.":
     'صف التقرير الذي تريده. يبنى بمحرك Esafe BLABS باستخدام البيانات المسموح لك بالاطلاع عليها فقط. احتفظ به إجابة لمرة واحدة أو ثبته في لوحة.',

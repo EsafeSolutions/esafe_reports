@@ -13,6 +13,12 @@ const outputDir = path.join(root, '.qa')
 await mkdir(outputDir, { recursive: true })
 const html = (await readFile(path.join(root, 'lumen_reports/www/lumen.html'), 'utf8'))
   .replace(/<script>\s*\{% for key in boot %\}[\s\S]*?<\/script>/, '<script>window.csrf_token="test-csrf";window.lumen_brand={can_manage:true};</script>')
+const versionPath = '/assets/lumen_reports/frontend/version.json'
+const { version: buildVersion } = JSON.parse(await readFile(path.join(publicDir, 'frontend/version.json'), 'utf8'))
+assert.ok(html.includes(`<meta name="lumen-build" content="${buildVersion}" />`))
+let reportedVersion = buildVersion
+let servedVersion = buildVersion
+let pageLoads = 0
 const iconUrl = '/assets/lumen_reports/logo/blabs-report.svg'
 const ready = {
   contract: 3, product: 'Esafe BLABS', reports_api: true, pos_installed: true,
@@ -29,6 +35,11 @@ const mime = { '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png'
 const server = createServer(async (req, res) => {
   try {
     const url = new URL(req.url, 'http://localhost')
+    if (url.pathname === versionPath) {
+      res.setHeader('Content-Type', 'application/json')
+      res.end(JSON.stringify({ version: reportedVersion }))
+      return
+    }
     if (url.pathname.startsWith('/api/method/')) {
       res.setHeader('Content-Type', 'application/json')
       if (url.pathname.endsWith('.get_status')) {
@@ -55,7 +66,8 @@ const server = createServer(async (req, res) => {
       return
     }
     res.setHeader('Content-Type', 'text/html')
-    res.end(html)
+    pageLoads++
+    res.end(html.replace(buildVersion, servedVersion))
   } catch (err) {
     console.error(err)
     res.writeHead(500)
@@ -126,8 +138,45 @@ try {
   await credit.waitFor()
   assert.equal(await credit.locator('img').getAttribute('src'), iconUrl)
   await credit.locator('img').evaluate(img => img.decode())
+  const refreshButton = page.getByRole('button', { name: 'Refresh now' })
+  const organization = page.getByPlaceholder('Blank uses the Company on this site')
+  await organization.fill('Unsaved company name')
+  const beforeUpdate = pageLoads
+  reportedVersion = 'a'.repeat(64)
+  await page.evaluate(() => window.dispatchEvent(new Event('focus')))
+  await refreshButton.waitFor()
+  assert.equal(pageLoads, beforeUpdate)
+  assert.equal(await organization.inputValue(), 'Unsaved company name')
+  servedVersion = reportedVersion
+  await Promise.all([page.waitForEvent('load'), refreshButton.click()])
+  assert.equal(pageLoads, beforeUpdate + 1)
+  assert.equal(await page.locator('meta[name="lumen-build"]').getAttribute('content'), servedVersion)
+
+  await page.goto(`${origin}/lumen`)
+  await page.getByRole('heading', { name: 'Esafe BLABS', exact: true }).waitFor()
+  const dashboardUrl = page.url()
+  const beforeAutoReload = pageLoads
+  reportedVersion = 'b'.repeat(64)
+  // The server reports a new build before the new HTML reaches this tab.
+  await Promise.all([
+    page.waitForEvent('load'),
+    page.evaluate(() => window.dispatchEvent(new Event('focus'))),
+  ])
+  await refreshButton.waitFor()
+  assert.equal(pageLoads, beforeAutoReload + 1)
+  assert.equal(await page.locator('meta[name="lumen-build"]').getAttribute('content'), servedVersion)
+  assert.equal(page.url(), dashboardUrl)
+
+  servedVersion = reportedVersion = 'c'.repeat(64)
+  await Promise.all([
+    page.waitForEvent('load'),
+    page.evaluate(() => window.dispatchEvent(new Event('focus'))),
+  ])
+  assert.equal(pageLoads, beforeAutoReload + 2)
+  assert.equal(await page.locator('meta[name="lumen-build"]').getAttribute('content'), servedVersion)
+  assert.equal(page.url(), dashboardUrl)
   assert.deepEqual(errors, [])
-  console.log('PASS: production routes, setup success/refusal, CSRF, permission/error/retry states, desktop/mobile, dark mode, no page errors.')
+  console.log('PASS: production routes, setup, permissions, desktop/mobile, dark mode, and safe deployment refresh.')
   console.log(`Screenshots: ${outputDir}`)
 } finally {
   if (browser) await browser.close()
