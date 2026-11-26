@@ -19,6 +19,9 @@ APP_ROLES = {
 
 def get_context(context):
 	if frappe.session.user == "Guest":
+		if frappe.local.request.path.rstrip("/") in ("/esafe-report/mobile", "/lumen/mobile"):
+			frappe.local.flags.redirect_location = "/login?redirect-to=%2Fesafe-report%2Fmobile"
+			raise frappe.Redirect
 		frappe.throw(frappe._("Please login to access Esafe BLABS"), frappe.PermissionError)
 	if frappe.session.user != "Administrator" and not (APP_ROLES & set(frappe.get_roles())):
 		frappe.throw(

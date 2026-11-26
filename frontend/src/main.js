@@ -7,6 +7,9 @@ import App from './App.vue'
 import router from './router'
 import './index.css'
 import '@/components/builder/controls.css'
+import { initializeInstall } from '@/lib/mobileApp'
+
+initializeInstall()
 
 setConfig('resourceFetcher', frappeRequest)
 

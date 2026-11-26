@@ -3,7 +3,7 @@
      Proprietary and confidential. See license.txt. "Lumen Reports" is a trademark of Lumen Solutions. -->
 <template>
   <div class="min-h-screen">
-    <header v-if="!embed" class="hd">
+    <header v-if="!embed && !route.meta.mobile" class="hd">
       <div class="mx-auto max-w-7xl px-6">
         <div class="row">
           <router-link to="/" class="brand">
@@ -11,6 +11,7 @@
             <span dir="ltr">Esafe BLABS</span>
           </router-link>
           <span class="sp" style="flex: 1"></span>
+          <router-link to="/mobile" class="theme-btn" style="text-decoration: none">{{ t('Mobile app') }}</router-link>
           <router-link to="/pos" class="theme-btn" style="text-decoration: none">{{ t('POS connection') }}</router-link>
           <router-link :to="{ name: 'AskAI', query: { mode: 'chat' } }" class="theme-btn" style="text-decoration: none; border-color: transparent; background: color-mix(in srgb, var(--blue) 10%, transparent); color: var(--blue)">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

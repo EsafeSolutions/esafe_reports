@@ -15,6 +15,10 @@ Open `/esafe-report/pos` to check the same-site POS connection and create the sa
 dashboard. Then use **POS → Insights → Sales dashboard**. See
 [ESAFE POS setup](docs/ESAFE-POS-SETUP.md) for installation and permissions.
 
+For the installable Android/iPhone experience, open `/esafe-report/mobile`.
+It includes date/outlet filters, reports, sale/return push alerts and daily summaries.
+See [Mobile app setup](docs/MOBILE-APP.md) for deployment and device installation.
+
 This customization keeps the technical app name `lumen_reports`, existing DocTypes,
 roles, API methods and `/lumen` URLs compatible with ESAFE POS and existing sites.
 The original licence, source notices and entitlement checks
@@ -238,7 +242,7 @@ rows.
 | `report.py` | PDF rendering (WeasyPrint), English and Arabic |
 | `schedules.py` | Schedule runner (scheduler cron, every 10 minutes) and delivery as each recipient |
 | `licensing.py` | Frappe Cloud subscription check, cached, and never blocking reads |
-| `integrations/lumenpos.py` | ESAFE POS Insights contract: read-only status, one-time dashboard setup, embed URL |
+| `integrations/esafepos.py` / `integrations/lumenpos.py` | ESAFE POS and legacy Insights entry points: shared read-only status, one-time dashboard setup, embed URL |
 | `frontend/` | Vue 3 + Vite + frappe-ui + ECharts SPA served at `/lumen` |
 | `lumen_reports/dev/` | Developer verification helpers, not part of the product surface |
 
@@ -249,16 +253,19 @@ apps meet only at runtime, through the calls below, and neither imports the othe
 
 | Call | What it does |
 |---|---|
-| `lumen_reports.integrations.lumenpos.get_status` (GET) | Read-only state for the POS page: `contract`, `license`, `dashboard_exists`, `can_view`, `can_create`, `reason` (`needs_erpnext`, `not_set_up`, `needs_role`, `not_in_audience`, or empty when ready), `slug`, `url`, `embed_url` |
-| `lumen_reports.integrations.lumenpos.ensure_dashboard` (POST, optional `lang`) | Creates the `lumenpos-sales` dashboard once and never overwrites it. Returns `status: ready`, or a refusal with a `message`: `needs_erpnext`, `license_expired`, `not_permitted`, `not_available` |
+| `lumen_reports.integrations.esafepos.get_status` (GET) | Read-only state for the POS page: `contract`, `license`, `dashboard_exists`, `can_view`, `can_create`, `reason` (`needs_erpnext`, `not_set_up`, `needs_role`, `not_in_audience`, or empty when ready), `slug`, `url`, `embed_url` |
+| `lumen_reports.integrations.esafepos.ensure_dashboard` (POST, optional `lang`) | Creates the `lumenpos-sales` dashboard once and never overwrites it. Returns `status: ready`, or a refusal with a `message`: `needs_erpnext`, `license_expired`, `not_permitted`, `not_available` |
+
+The legacy `lumen_reports.integrations.lumenpos` methods continue to serve the same
+contract. Both `esafepos` and `lumenpos` are recognized as installed POS apps.
 
 - **Embed** at `/lumen/embed/<slug>`, optionally with `?lang=en|ar` and
   `?theme=light|dark`. It shows the dashboard with its filters and live updates,
   without the app header, navigation or edit controls.
-- **Access** is unchanged. The viewer needs an Esafe BLABS role, and **Lumen Restricted
-  Viewer** is enough: the dashboard names `LumenPOS Manager` as its audience, so that
-  viewer sees this dashboard and nothing else. The numbers still need read permission
-  on POS Invoice.
+- **Access** requires an Esafe BLABS role. **Lumen Restricted Viewer** plus
+  `EsafePOS Manager` lets a POS manager see this dashboard and nothing else. Legacy
+  installations use `LumenPOS Manager`; new dashboards include whichever manager
+  roles exist on the site. The numbers still need read permission on POS Invoice.
 - **Setup** needs Lumen Builder, Lumen Manager or System Manager, so call
   `ensure_dashboard` from an administrator's action.
 - **Data** comes from submitted POS Invoices only, so sales consolidated into Sales

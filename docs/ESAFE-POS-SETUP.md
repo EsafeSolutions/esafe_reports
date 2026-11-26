@@ -46,9 +46,10 @@ required data cannot be read during setup and reports those omissions.
 
 - Setup requires `Lumen Builder`, `Lumen Manager`, or `System Manager` and the
   existing reporting entitlement rules.
-- A POS manager can use `Lumen Restricted Viewer` plus the existing `LumenPOS Manager`
-  role to see the POS dashboard without exposing unrelated dashboards. ESAFE POS
-  retains that technical role name.
+- A POS manager can use `Lumen Restricted Viewer` plus `EsafePOS Manager`
+  to see the POS dashboard without exposing unrelated dashboards. Legacy LumenPOS
+  installations use `LumenPOS Manager`. New dashboards include whichever of these
+  roles exist on the site.
 - Read access to `POS Invoice` and the linked records used by each chart is still
   required. The connection screen checks base invoice access; individual chart
   queries enforce their own linked-record permissions.
@@ -58,11 +59,14 @@ required data cannot be read during setup and reports those omissions.
 
 ## Compatibility
 
-The POS continues to call `lumen_reports.integrations.lumenpos.get_status` (GET) and
-`lumen_reports.integrations.lumenpos.ensure_dashboard` (POST). Contract version 3,
-dashboard slug `lumenpos-sales`, and registered-report endpoints are unchanged.
+ESAFE POS calls `lumen_reports.integrations.esafepos.get_status` (GET) and
+`lumen_reports.integrations.esafepos.ensure_dashboard` (POST). These delegate to
+the shared implementation at `lumen_reports.integrations.lumenpos`, whose existing
+endpoints remain available for legacy POS clients and the connection screen.
+Contract version 3, dashboard slug `lumenpos-sales`, and registered-report endpoints are unchanged.
 Status now also returns `product`, `pos_installed`, and `can_read_source` for the
-Esafe BLABS connection screen. These fields do not widen access.
+Esafe BLABS connection screen. POS detection recognizes the installed Frappe app
+names `esafepos` and `lumenpos`. These fields do not widen access.
 
 Both `/esafe-report/...` and `/lumen/...` serve the same frontend. Existing POS embeds
 at `/lumen/embed/lumenpos-sales` keep working, including language and theme parameters.
@@ -74,6 +78,20 @@ after a register close consolidates them into Sales Invoices.
 Open `/esafe-report/pos`, then verify the embedded dashboard as an authorized POS
 manager. Compare a known date/outlet to the POS invoice totals, including a return.
 Verify that an unauthorized user cannot view the dashboard or its invoice data.
+
+If the connection screen says **Install ESAFE POS on this site** while POS is
+already running, and POS says the reports version **does not include the EsafePOS
+dashboard yet**, deploy a reports release containing
+`lumen_reports/integrations/esafepos.py`. Older reports releases checked only the
+`lumenpos` app name and did not provide the `esafepos` API path that ESAFE POS calls.
+No POS reinstall or API key is needed for this compatibility fix.
+
+After updating the reports checkout, migrate and clear the site cache, then restart
+the bench processes (or complete the Frappe Cloud deployment so the workers reload).
+Open `/esafe-report/pos`, choose **Set up sales dashboard** if offered, then refresh
+**POS → Insights → Sales dashboard**. Existing dashboards are preserved; if an
+existing dashboard names only `LumenPOS Manager`, its owner can add `EsafePOS Manager`
+to its audience when access for that role is intended.
 
 Local checks (no Frappe site needed):
 

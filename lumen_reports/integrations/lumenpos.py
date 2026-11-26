@@ -40,6 +40,8 @@ from lumen_reports.www.lumen import APP_ROLES
 CONTRACT_VERSION = 3
 SLUG = "lumenpos-sales"
 AUDIENCE_ROLE = "LumenPOS Manager"
+AUDIENCE_ROLES = ("EsafePOS Manager", AUDIENCE_ROLE)
+POS_APPS = {"esafepos", "lumenpos"}
 
 # POS Invoice only. Closing a register consolidates POS Invoices into Sales
 # Invoices and both stay submitted, so reading both would count every sale twice.
@@ -308,10 +310,11 @@ def _create(lang):
 	doc.description = tr(DESCRIPTION)
 	doc.auto_refresh = 1
 	doc.is_published = 1
-	# only when LumenPOS has installed its role; otherwise the dashboard is simply
+	# only when a supported POS has installed its role; otherwise the dashboard is simply
 	# published, and managers see everything whatever the audience
-	if frappe.db.exists("Role", AUDIENCE_ROLE):
-		doc.append("visible_to_roles", {"role": AUDIENCE_ROLE})
+	for role in AUDIENCE_ROLES:
+		if frappe.db.exists("Role", role):
+			doc.append("visible_to_roles", {"role": role})
 
 	layout = []
 	for widget_id, title, widget_type, query, style, linked, (x, y, w, h) in WIDGETS:
@@ -370,7 +373,7 @@ def get_status():
 	return {
 		**_links(),
 		"product": "Esafe BLABS",
-		"pos_installed": "lumenpos" in frappe.get_installed_apps(),
+		"pos_installed": bool(POS_APPS.intersection(frappe.get_installed_apps())),
 		"can_read_source": has_source and frappe.has_permission(SOURCE, "read"),
 		"license": licensing.get_status().get("status"),
 		"dashboard_exists": bool(name),

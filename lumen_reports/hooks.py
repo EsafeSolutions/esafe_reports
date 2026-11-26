@@ -154,6 +154,9 @@ after_install = "lumen_reports.setup.after_install"
 after_migrate = "lumen_reports.setup.after_migrate"
 
 doc_events = {
+	"POS Invoice": {
+		"on_submit": "lumen_reports.notifications.on_invoice_submit",
+	},
 	"*": {
 		"on_change": "lumen_reports.realtime.notify_doc_change",
 		"after_delete": "lumen_reports.realtime.notify_doc_change",
@@ -176,7 +179,9 @@ website_route_rules = [
 
 # scheduled report delivery: every ten minutes, send whatever has come due
 scheduler_events = {
+	"daily": ["lumen_reports.notifications.cleanup_logs"],
 	"cron": {
+		"*/5 * * * *": ["lumen_reports.notifications.send_due_summaries"],
 		"*/10 * * * *": ["lumen_reports.schedules.run_due"],
 	},
 }

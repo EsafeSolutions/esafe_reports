@@ -1,0 +1,107 @@
+{
+ "doctype": "DocType",
+ "module": "Lumen Reports",
+ "engine": "InnoDB",
+ "track_changes": 0,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "actions": [],
+ "links": [],
+ "states": [],
+ "permissions": [],
+ "name": "Lumen Push Subscription",
+ "field_order": [
+  "endpoint_hash",
+  "user",
+  "enabled",
+  "endpoint",
+  "p256dh",
+  "auth_key",
+  "sales_alerts",
+  "daily_summary",
+  "summary_time",
+  "timezone",
+  "language",
+  "summary_last_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "endpoint_hash",
+   "fieldtype": "Data",
+   "label": "Endpoint hash",
+   "reqd": 1,
+   "unique": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled",
+   "default": "1"
+  },
+  {
+   "fieldname": "endpoint",
+   "fieldtype": "Small Text",
+   "label": "Push endpoint",
+   "reqd": 1
+  },
+  {
+   "fieldname": "p256dh",
+   "fieldtype": "Data",
+   "label": "Browser public key",
+   "reqd": 1
+  },
+  {
+   "fieldname": "auth_key",
+   "fieldtype": "Password",
+   "label": "Browser authentication secret",
+   "hidden": 1
+  },
+  {
+   "fieldname": "sales_alerts",
+   "fieldtype": "Check",
+   "label": "New sales and returns",
+   "default": "1"
+  },
+  {
+   "fieldname": "daily_summary",
+   "fieldtype": "Check",
+   "label": "Daily sales summary",
+   "default": "1"
+  },
+  {
+   "fieldname": "summary_time",
+   "fieldtype": "Time",
+   "label": "Daily summary time",
+   "default": "20:00:00"
+  },
+  {
+   "fieldname": "timezone",
+   "fieldtype": "Data",
+   "label": "Device time zone",
+   "default": "Asia/Colombo"
+  },
+  {
+   "fieldname": "language",
+   "fieldtype": "Select",
+   "label": "Language",
+   "options": "en\nar",
+   "default": "en"
+  },
+  {
+   "fieldname": "summary_last_date",
+   "fieldtype": "Date",
+   "label": "Last summary date",
+   "read_only": 1
+  }
+ ],
+ "autoname": "field:endpoint_hash"
+}

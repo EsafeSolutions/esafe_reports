@@ -37,7 +37,11 @@ def ensure_roles():
 
 def after_install():
 	ensure_roles()
+	from lumen_reports.notifications import setup_push
+	setup_push()
 
 
 def after_migrate():
 	ensure_roles()
+	from lumen_reports.notifications import setup_push
+	setup_push()

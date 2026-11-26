@@ -1,0 +1,47 @@
+{
+ "doctype": "DocType",
+ "module": "Lumen Reports",
+ "engine": "InnoDB",
+ "track_changes": 0,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "actions": [],
+ "links": [],
+ "states": [],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1
+  }
+ ],
+ "name": "Lumen Push Settings",
+ "field_order": [
+  "public_key",
+  "private_key",
+  "contact"
+ ],
+ "fields": [
+  {
+   "fieldname": "public_key",
+   "fieldtype": "Data",
+   "label": "Public key",
+   "read_only": 1
+  },
+  {
+   "fieldname": "private_key",
+   "fieldtype": "Password",
+   "label": "Private key",
+   "hidden": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Data",
+   "label": "Push service contact",
+   "default": "mailto:hello@esafe.lk",
+   "reqd": 1
+  }
+ ],
+ "issingle": 1
+}

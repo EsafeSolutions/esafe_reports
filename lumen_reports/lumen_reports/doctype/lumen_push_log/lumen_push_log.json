@@ -1,0 +1,59 @@
+{
+ "doctype": "DocType",
+ "module": "Lumen Reports",
+ "engine": "InnoDB",
+ "track_changes": 0,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "actions": [],
+ "links": [],
+ "states": [],
+ "permissions": [],
+ "name": "Lumen Push Log",
+ "field_order": [
+  "user",
+  "subscription",
+  "title",
+  "body",
+  "kind",
+  "delivery_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "subscription",
+   "fieldtype": "Link",
+   "label": "Device",
+   "options": "Lumen Push Subscription"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "body",
+   "fieldtype": "Small Text",
+   "label": "Message"
+  },
+  {
+   "fieldname": "kind",
+   "fieldtype": "Select",
+   "label": "Kind",
+   "options": "Sale\nReturn\nSummary\nTest"
+  },
+  {
+   "fieldname": "delivery_status",
+   "fieldtype": "Select",
+   "label": "Delivery status",
+   "options": "Sent\nFailed"
+  }
+ ],
+ "autoname": "hash"
+}

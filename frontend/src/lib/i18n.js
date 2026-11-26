@@ -2,8 +2,11 @@
 // SPDX-License-Identifier: LicenseRef-Lumen-Proprietary
 // Proprietary and confidential. See license.txt. "Lumen Reports" is a trademark of Lumen Solutions.
 import { computed, ref } from 'vue'
-import ar from '@/lib/locales/ar'
+import baseAr from '@/lib/locales/ar'
+import mobileAr from '@/lib/locales/mobile-ar'
 import { themeVersion } from '@/lib/theme'
+
+const ar = { ...baseAr, ...mobileAr }
 
 /**
  * Two languages, one switch. English strings are their own keys, so a string

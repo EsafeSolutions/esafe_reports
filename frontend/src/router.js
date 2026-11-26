@@ -5,6 +5,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
+    path: '/mobile',
+    name: 'MobilePOS',
+    component: () => import('@/pages/MobilePOS.vue'),
+    meta: { mobile: true, autoReload: true },
+  },
+  {
     path: '/pos',
     name: 'POSConnection',
     component: () => import('@/pages/POSConnection.vue'),
