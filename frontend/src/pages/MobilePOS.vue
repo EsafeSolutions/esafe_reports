@@ -26,7 +26,7 @@
 				:aria-busy="loading"
 			>
 				<div class="m-heading-line">
-					<h1>{{ t(tab === 'overview' ? 'Sales overview' : 'Reports') }}</h1>
+					<h1>{{ t(tab === 'overview' ? 'Sales overview' : returnsView ? 'Returns' : 'Reports') }}</h1>
 					<button
 						class="m-icon-button m-refresh"
 						:disabled="loading || refreshing || !online"
@@ -68,17 +68,7 @@
 					</div>
 				</template>
 				<template v-else>
-					<div class="m-period" role="group" :aria-label="t('Sales period')">
-						<button
-							v-for="item in periods"
-							:key="item.key"
-							:aria-pressed="period === item.key"
-							:class="{ selected: period === item.key }"
-							@click="period = item.key"
-						>
-							{{ t(item.label) }}
-						</button>
-					</div>
+					<MobilePeriod v-model="period" v-model:custom-range="customRange" />
 					<MobileOutlet v-if="hasOutletFilter" v-model="outlet" />
 					<p v-if="error" class="m-error" role="alert">{{ error }}</p>
 					<template v-if="tab === 'overview'">
@@ -122,7 +112,7 @@
 								{{ widgetErrors.sales_by_day }}
 							</p>
 						</div>
-						<button class="m-returns" @click="pick('reports')">
+						<button class="m-returns" @click="pickReport('returns')">
 							<MobileIcon name="return" /><strong>{{ t('Returns') }}</strong
 							><span dir="auto">{{ metric('returns') }}</span
 							><MobileIcon name="chevron" :size="19" />
@@ -139,7 +129,9 @@
 						</p>
 					</template>
 					<template v-else>
-						<div class="m-reports-grid">
+						<div class="m-period m-report-tabs" role="group" :aria-label="t('Report view')"><button :aria-pressed="!returnsView" :class="{ selected: !returnsView }" @click="pickReport('all')">{{ t('All reports') }}</button><button :aria-pressed="returnsView" :class="{ selected: returnsView }" @click="pickReport('returns')">{{ t('Returns') }}</button></div>
+						<MobileReturns v-if="returnsView" :range="selectedRange" :outlet="outlet" :refresh-key="refreshKey" :online="online" />
+						<template v-else><div class="m-reports-grid">
 							<div
 								v-for="(widget, i) in reportWidgets"
 								:key="widget.widget_id"
@@ -174,6 +166,7 @@
 							class="m-outline m-full"
 							>{{ t('Open full dashboard') }}</router-link
 						>
+						</template>
 					</template>
 				</template>
 			</section>
@@ -203,12 +196,14 @@ import { useRoute, useRouter } from 'vue-router'
 import MobileIcon from '@/components/mobile/MobileIcon.vue'
 import MobileTrend from '@/components/mobile/MobileTrend.vue'
 import MobileOutlet from '@/components/mobile/MobileOutlet.vue'
+import MobilePeriod from '@/components/mobile/MobilePeriod.vue'
 import MobileNotifications from '@/components/mobile/MobileNotifications.vue'
 import MobileSettings from '@/components/mobile/MobileSettings.vue'
 import { mobileApi } from '@/lib/mobileApi'
 import { numericValue, pushWorker } from '@/lib/mobileApp'
 import { appIcon, brand } from '@/lib/brand'
 import { presetRange, ymd } from '@/lib/dateRanges'
+import { formatMobileRange } from '@/lib/mobileDateRange'
 import { connectionState, CONNECTION_MESSAGES, SETUP_METHOD } from '@/lib/posConnection'
 import { getSocket } from '@/lib/socket'
 import { isStatic } from '@/lib/widgetTypes'
@@ -219,6 +214,7 @@ import '@/components/mobile/mobile.css'
 const ChartWidget = defineAsyncComponent(() => import('@/components/widgets/ChartWidget.vue'))
 const NumberCard = defineAsyncComponent(() => import('@/components/widgets/NumberCard.vue'))
 const TableWidget = defineAsyncComponent(() => import('@/components/widgets/TableWidget.vue'))
+const MobileReturns = defineAsyncComponent(() => import('@/components/mobile/MobileReturns.vue'))
 
 const route = useRoute(),
 	router = useRouter()
@@ -228,15 +224,12 @@ const tabs = [
 	{ key: 'alerts', label: 'Alerts', icon: 'bell' },
 	{ key: 'settings', label: 'Settings', icon: 'settings' },
 ]
-const periods = [
-	{ key: 'today', label: 'Today' },
-	{ key: 'last_7_days', label: '7 days' },
-	{ key: 'this_month', label: 'Month' },
-]
 const tab = computed(() =>
 	tabs.some((item) => item.key === route.query.tab) ? route.query.tab : 'overview',
 )
+const returnsView = computed(() => tab.value === 'reports' && route.query.view === 'returns')
 const period = ref('today'),
+	customRange = ref([]),
 	outlet = ref(''),
 	context = ref(null),
 	dashboard = ref(null),
@@ -260,8 +253,12 @@ const connectionMessage = computed(() =>
 		? ['Could not load your sales', 'Check your connection and try again.']
 		: CONNECTION_MESSAGES[state.value] || CONNECTION_MESSAGES.loading,
 )
+const selectedRange = computed(() => {
+	void today.value
+	return period.value === 'custom' ? customRange.value : presetRange(period.value)
+})
 const filters = computed(() => ({
-	posting_date: presetRange(period.value),
+	posting_date: selectedRange.value,
 	...(outlet.value ? { pos_profile: outlet.value } : {}),
 }))
 const hasOutletFilter = computed(() =>
@@ -272,6 +269,7 @@ const reportWidgets = computed(() =>
 )
 const dateLabel = computed(() => {
 	void today.value
+	if (period.value !== 'today') return formatMobileRange(selectedRange.value, lang.value)
 	return new Date().toLocaleDateString(lang.value === 'ar' ? 'ar' : 'en', {
 		weekday: 'short',
 		day: 'numeric',
@@ -299,6 +297,10 @@ let socket,
 const subscribed = new Set()
 function pick(next) {
 	router.replace({ name: 'MobilePOS', query: next === 'overview' ? {} : { tab: next } })
+	window.scrollTo({ top: 0, behavior: 'instant' })
+}
+function pickReport(view) {
+	router.replace({ name: 'MobilePOS', query: { tab: 'reports', ...(view === 'returns' ? { view: 'returns' } : {}) } })
 	window.scrollTo({ top: 0, behavior: 'instant' })
 }
 function metric(id, money = true) {
@@ -434,7 +436,7 @@ function onNetwork() {
 	online.value = navigator.onLine
 	if (online.value) load()
 }
-watch([period, outlet], loadMetrics)
+watch(filters, loadMetrics, { deep: true })
 onMounted(() => {
 	load()
 	pushWorker().catch(() => {})

@@ -156,6 +156,44 @@
 	border-radius: 9px;
 	font-weight: 700;
 }
+.m-custom-range {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	width: 100%;
+	min-height: 44px;
+	margin: 0 0 14px;
+	padding: 9px 12px;
+	border: 1px solid var(--border-2);
+	border-radius: 10px;
+	background: var(--panel);
+	color: var(--ink);
+	font-size: 14px !important;
+	cursor: pointer;
+}
+.m-custom-range span { flex: 1; text-align: start; }
+.m-date-fields { display: grid; gap: 16px; }
+.m-date-fields label { display: grid; gap: 7px; font-size: 14px; font-weight: 650; }
+.m-date-fields input { min-width: 0; width: 100%; min-height: 46px; padding: 9px 12px; border: 1px solid var(--border-2); border-radius: 9px; background: var(--panel); color: var(--ink); font-size: 16px; }
+.m-date-actions { display: flex; gap: 12px; margin-top: 22px; }
+.m-date-actions button { flex: 1; }
+.m-report-tabs { margin-top: 8px; }
+.m-return-heading, .m-return-invoice-top, .m-return-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.m-return-heading span, .m-return-meta { font-size: 12px; color: var(--muted); }
+.m-return-invoice { padding: 16px 0; border-bottom: 1px solid var(--border); }
+.m-return-invoice-top { font-size: 14px; }
+.m-return-invoice-top > strong:first-child { min-width: 0; overflow-wrap: anywhere; }
+.m-return-amount { flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.m-return-invoice p { font-size: 14px; margin: 5px 0; overflow-wrap: anywhere; }
+.m-return-invoice small { display: block; font-size: 12px; color: var(--muted); margin-top: 6px; overflow-wrap: anywhere; }
+.m-return-meta { flex-wrap: wrap; gap: 4px 10px; }
+.m-return-pagination { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 20px; }
+.m-return-pagination > span { font-size: 12px; color: var(--muted); text-align: center; }
+.m-return-pagination button { padding-inline: 12px; }
+.m-empty-returns { padding: 30px 10px; text-align: center; }
+.m-empty-returns > svg { margin: 0 auto 14px; color: var(--muted); }
+.m-empty-returns p { color: var(--muted); font-size: 14px; }
 .m-outlet {
 	display: flex;
 	align-items: center;
