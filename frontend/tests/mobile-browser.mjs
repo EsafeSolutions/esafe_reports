@@ -60,7 +60,7 @@ try {
   await page.getByRole('button', { name: 'Reports', exact: true }).click()
   await page.getByRole('heading', { name: 'Reports', exact: true }).waitFor()
   await page.getByText('Payment Mix', { exact: true }).waitFor()
-  await page.getByRole('button', { name: 'Alerts', exact: true }).click()
+  await page.getByRole('button', { name: 'Open alerts', exact: true }).click()
   await page.getByRole('heading', { name: 'Alerts', exact: true }).waitFor()
   await page
     .getByRole('button', { name: 'Enable notifications', exact: true })

@@ -4,6 +4,8 @@
   "version": "1.4.0",
   "description": "Esafe BLABS — live sales dashboards connected to ESAFE POS",
   "scripts": {
+    "android:prepare": "powershell -File scripts/prepare-android.ps1",
+    "android:build": "powershell -File scripts/build-android.ps1",
     "dev": "cd frontend && yarn dev",
     "build": "cd frontend && yarn install --frozen-lockfile && yarn build"
   }

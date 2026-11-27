@@ -21,6 +21,11 @@ defineProps({
 	size: { type: [Number, String], default: 24 },
 })
 const paths = {
+	home: ['m3 10 9-7 9 7v11h-6v-7H9v7H3Z'],
+	box: ['m12 2 9 5v10l-9 5-9-5V7Z', 'm3 7 9 5 9-5M12 12v10M7.5 4.5l9 5'],
+	inventory: ['M8 2h8v7H8ZM2 15h8v7H2ZM14 15h8v7h-8ZM12 9v3M6 15v-3h12v3'],
+	search: ['M20 20l-5-5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z'],
+	back: ['m10 5-7 7 7 7M3 12h18'],
 	chart: ['M4 20V10a1 1 0 0 1 2 0v10M11 20V5a1 1 0 0 1 2 0v15M18 20V2a1 1 0 0 1 2 0v18'],
 	reports: ['M7 3h10a3 3 0 0 1 3 3v14l-4-2-4 2-4-2-4 2V6a3 3 0 0 1 3-3Z', 'M8 8h8M8 12h6'],
 	receipt: ['M5 2h14v20l-3-2-4 2-4-2-3 2V2Z', 'M8 7h8M8 11h6'],

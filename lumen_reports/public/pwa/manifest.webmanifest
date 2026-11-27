@@ -1,9 +1,9 @@
 {
   "id": "/esafe-report/mobile",
-  "name": "Esafe BLABS POS Dashboard",
+  "name": "Esafe BLABS Prices and Stock",
   "short_name": "Esafe BLABS",
-  "description": "Your POS sales, reports and notifications, wherever you are.",
-  "start_url": "/esafe-report/mobile",
+  "description": "Check product prices, warehouse stock, category sales and inventory from ESAFE POS.",
+  "start_url": "/esafe-report/mobile?tab=products",
   "scope": "/esafe-report/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -16,6 +16,9 @@
     { "src": "/assets/lumen_reports/pwa/icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
+    { "name": "Prices and products", "url": "/esafe-report/mobile?tab=products" },
+    { "name": "Inventory", "url": "/esafe-report/mobile?tab=inventory" },
+    { "name": "Category sales", "url": "/esafe-report/mobile?tab=sales" },
     { "name": "Sales overview", "url": "/esafe-report/mobile" },
     { "name": "Alerts", "url": "/esafe-report/mobile?tab=alerts" }
   ]

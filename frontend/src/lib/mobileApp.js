@@ -6,6 +6,7 @@ let workerPromise
 
 export function deviceEnvironment(nav = navigator, win = window) {
 	return {
+		native: /EsafeNative\//.test(nav.userAgent),
 		ios:
 			/iPad|iPhone|iPod/.test(nav.userAgent) ||
 			(nav.platform === 'MacIntel' && nav.maxTouchPoints > 1),
@@ -20,7 +21,7 @@ export function deviceEnvironment(nav = navigator, win = window) {
 export function initializeInstall() {
 	if (initialized) return
 	initialized = true
-	installState.installed = deviceEnvironment().standalone
+	installState.installed = deviceEnvironment().standalone || deviceEnvironment().native
 	window.addEventListener('beforeinstallprompt', (event) => {
 		event.preventDefault()
 		installState.prompt = event

@@ -1,0 +1,19 @@
+ESAFE BLABS — Osaka mobile app
+
+Android: transfer Esafe-BLABS-Android-development.apk to the phone and tap to install.
+This APK is development-signed; it is not a Play Store release.
+
+iPhone: open https://osaka.cloud.esafe.lk/esafe-report/mobile?tab=products in Safari.
+Tap Share > Add to Home Screen > Add, then open the ESAFE icon.
+
+Sign in with your existing Osaka account. Internet access is needed for live data.
+
+DEPLOY THE SERVER UPDATE FIRST to activate the new Products, Inventory and Sales
+screens. Installing an APK or Home Screen icon does not update the Osaka server.
+The server has not been deployed from this workspace.
+
+Esafe-BLABS-Server-Update.zip: the complete reports-app release source and built assets.
+Esafe-BLABS-Mobile-Source.zip: native source and build scripts (optional native iOS source included).
+
+Deployment and permissions: esafe_reports/native/README.md inside either ZIP.
+No site backup, credentials, private signing keys or real business data are included.

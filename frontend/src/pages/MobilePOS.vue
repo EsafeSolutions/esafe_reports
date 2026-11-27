@@ -21,12 +21,12 @@
 		</div>
 		<main class="m-main">
 			<section
-				v-if="tab === 'overview' || tab === 'reports'"
+				v-if="['overview', 'reports', 'sales'].includes(tab)"
 				class="m-section"
 				:aria-busy="loading"
 			>
 				<div class="m-heading-line">
-					<h1>{{ t(tab === 'overview' ? 'Sales overview' : returnsView ? 'Returns' : 'Reports') }}</h1>
+					<h1>{{ t(tab === 'overview' ? 'Sales overview' : tab === 'sales' ? 'Category sales' : returnsView ? 'Returns' : 'Reports') }}</h1>
 					<button
 						class="m-icon-button m-refresh"
 						:disabled="loading || refreshing || !online"
@@ -36,7 +36,7 @@
 						<MobileIcon name="refresh" :size="20" />
 					</button>
 				</div>
-				<p class="m-date"><MobileIcon name="calendar" :size="19" />{{ dateLabel }}</p>
+				<p v-if="tab !== 'sales'" class="m-date"><MobileIcon name="calendar" :size="19" />{{ dateLabel }}</p>
 				<template v-if="loading"
 					><div class="m-loading" role="status">
 						{{ t('Loading your sales…') }}
@@ -71,7 +71,8 @@
 					<MobilePeriod v-model="period" v-model:custom-range="customRange" />
 					<MobileOutlet v-if="hasOutletFilter" v-model="outlet" />
 					<p v-if="error" class="m-error" role="alert">{{ error }}</p>
-					<template v-if="tab === 'overview'">
+					<MobileCategorySales v-if="tab === 'sales'" :range="selectedRange" :outlet="outlet" :refresh-key="refreshKey" :online="online" />
+					<template v-else-if="tab === 'overview'">
 						<div class="m-sales-panel" :aria-busy="refreshing">
 							<div class="m-sales-primary">
 								<MobileIcon name="receipt" :size="45" />
@@ -117,6 +118,7 @@
 							><span dir="auto">{{ metric('returns') }}</span
 							><MobileIcon name="chevron" :size="19" />
 						</button>
+						<button class="m-outline m-full" @click="pick('reports')">{{ t('Reports') }}<MobileIcon name="chevron" :size="18" /></button>
 						<p
 							v-if="Object.keys(widgetErrors).some((key) => key !== 'sales_by_day')"
 							class="m-notice"
@@ -170,6 +172,7 @@
 					</template>
 				</template>
 			</section>
+			<MobileCatalog v-if="tab === 'products' || tab === 'inventory'" :key="tab" :inventory="tab === 'inventory'" :online="online" :refresh-key="refreshKey" />
 			<MobileNotifications
 				v-show="tab === 'alerts'"
 				:ready="ready"
@@ -199,6 +202,8 @@ import MobileOutlet from '@/components/mobile/MobileOutlet.vue'
 import MobilePeriod from '@/components/mobile/MobilePeriod.vue'
 import MobileNotifications from '@/components/mobile/MobileNotifications.vue'
 import MobileSettings from '@/components/mobile/MobileSettings.vue'
+import MobileCatalog from '@/components/mobile/MobileCatalog.vue'
+import MobileCategorySales from '@/components/mobile/MobileCategorySales.vue'
 import { mobileApi } from '@/lib/mobileApi'
 import { numericValue, pushWorker } from '@/lib/mobileApp'
 import { appIcon, brand } from '@/lib/brand'
@@ -219,13 +224,14 @@ const MobileReturns = defineAsyncComponent(() => import('@/components/mobile/Mob
 const route = useRoute(),
 	router = useRouter()
 const tabs = [
-	{ key: 'overview', label: 'Overview', icon: 'chart' },
-	{ key: 'reports', label: 'Reports', icon: 'reports' },
-	{ key: 'alerts', label: 'Alerts', icon: 'bell' },
+	{ key: 'overview', label: 'Overview', icon: 'home' },
+	{ key: 'products', label: 'Products', icon: 'box' },
+	{ key: 'sales', label: 'Sales', icon: 'chart' },
+	{ key: 'inventory', label: 'Inventory', icon: 'inventory' },
 	{ key: 'settings', label: 'Settings', icon: 'settings' },
 ]
 const tab = computed(() =>
-	tabs.some((item) => item.key === route.query.tab) ? route.query.tab : 'overview',
+	[...tabs.map(item => item.key), 'reports', 'alerts'].includes(route.query.tab) ? route.query.tab : 'overview',
 )
 const returnsView = computed(() => tab.value === 'reports' && route.query.view === 'returns')
 const period = ref('today'),

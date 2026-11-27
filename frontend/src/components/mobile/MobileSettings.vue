@@ -22,7 +22,9 @@
 				>
 			</div>
 		</div>
-		<div
+		<a v-if="!nativeApp && !iosDevice" class="m-outline m-full m-apk-download" href="/assets/lumen_reports/downloads/Esafe-BLABS-Android-development.apk" download>{{ t('Download Android APK') }}<MobileIcon name="download" :size="18" /></a>
+		<p v-if="!nativeApp && !iosDevice" class="m-notice">{{ t('Development-signed Android app for this ESAFE site.') }}</p>
+		<div v-if="!nativeApp"
 			ref="instructions"
 			class="m-rows m-install-instructions"
 			:class="{ highlighted: installState.help }"
@@ -89,9 +91,12 @@ import { ref, nextTick } from 'vue'
 import MobileIcon from './MobileIcon.vue'
 import { appIcon } from '@/lib/brand'
 import { installState, installApp } from '@/lib/mobileApp'
+import { deviceEnvironment } from '@/lib/mobileApp'
 import { t, lang, setLang } from '@/lib/i18n'
 import { theme, toggleTheme } from '@/lib/theme'
 defineProps({ ready: Boolean })
+const nativeApp = deviceEnvironment().native
+const iosDevice = deviceEnvironment().ios
 const instructions = ref(null),
 	installNotice = ref('')
 async function install() {

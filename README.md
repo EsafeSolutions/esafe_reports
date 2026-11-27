@@ -19,6 +19,11 @@ For the installable Android/iPhone experience, open `/esafe-report/mobile`.
 It includes date/outlet filters, reports, sale/return push alerts and daily summaries.
 See [Mobile app setup](docs/MOBILE-APP.md) for deployment and device installation.
 
+The mobile app also includes searchable product prices, barcode lookup, current
+warehouse inventory, and category/product sales with CSV exports. An Android APK
+and native source are available in `downloads/`. iPhone uses the installable
+Home Screen app. See [download and deployment guide](native/README.md).
+
 This customization keeps the technical app name `lumen_reports`, existing DocTypes,
 roles, API methods and `/lumen` URLs compatible with ESAFE POS and existing sites.
 The original licence, source notices and entitlement checks
