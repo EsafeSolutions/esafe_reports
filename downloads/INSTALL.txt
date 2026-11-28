@@ -14,6 +14,8 @@ The server has not been deployed from this workspace.
 
 Esafe-BLABS-Server-Update.zip: the complete reports-app release source and built assets.
 Esafe-BLABS-Mobile-Source.zip: native source and build scripts (optional native iOS source included).
+Esafe-BLABS-Sales-Hotfix.zip: server fix for 'Field parent not found on POS Invoice Item'.
+See esafe_reports/docs/SALES-PARENT-HOTFIX.md inside the hotfix ZIP. No APK reinstall is needed.
 
 Deployment and permissions: esafe_reports/native/README.md inside either ZIP.
 No site backup, credentials, private signing keys or real business data are included.

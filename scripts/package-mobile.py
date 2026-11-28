@@ -29,6 +29,7 @@ def package(name, paths):
 
 package("Esafe-BLABS-Mobile-Source.zip", ["native", "scripts/prepare-android.ps1", "scripts/build-android.ps1", "license.txt", "TRADEMARKS.md"])
 package("Esafe-BLABS-Server-Update.zip", ["lumen_reports", "frontend/src", "frontend/tests", "frontend/package.json", "frontend/yarn.lock", "frontend/index.html", "frontend/vite.config.js", "frontend/postcss.config.js", "frontend/tailwind.config.js", "tests", "docs", "native", "scripts", "package.json", "pyproject.toml", "README.md", "license.txt", "TRADEMARKS.md"])
+package("Esafe-BLABS-Sales-Hotfix.zip", ["lumen_reports/report_engine.py", "tests/test_report_engine_child_fields.py", "tests/requirements.txt", "docs/SALES-PARENT-HOTFIX.md", "license.txt"])
 
 guide = """ESAFE BLABS — Osaka mobile app
 
@@ -46,12 +47,14 @@ The server has not been deployed from this workspace.
 
 Esafe-BLABS-Server-Update.zip: the complete reports-app release source and built assets.
 Esafe-BLABS-Mobile-Source.zip: native source and build scripts (optional native iOS source included).
+Esafe-BLABS-Sales-Hotfix.zip: server fix for 'Field parent not found on POS Invoice Item'.
+See esafe_reports/docs/SALES-PARENT-HOTFIX.md inside the hotfix ZIP. No APK reinstall is needed.
 
 Deployment and permissions: esafe_reports/native/README.md inside either ZIP.
 No site backup, credentials, private signing keys or real business data are included.
 """
 (OUT / "INSTALL.txt").write_text(guide, encoding="utf-8")
-files = [OUT / "Esafe-BLABS-Android-development.apk", OUT / "Esafe-BLABS-Mobile-Source.zip", OUT / "Esafe-BLABS-Server-Update.zip"]
+files = [OUT / "Esafe-BLABS-Android-development.apk", OUT / "Esafe-BLABS-Mobile-Source.zip", OUT / "Esafe-BLABS-Server-Update.zip", OUT / "Esafe-BLABS-Sales-Hotfix.zip"]
 (OUT / "SHA256SUMS.txt").write_text("\n".join(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.name}" for path in files) + "\n", encoding="ascii")
 for path in files:
     print(f"{path.name}: {path.stat().st_size:,} bytes")

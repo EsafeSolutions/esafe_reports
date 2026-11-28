@@ -85,3 +85,19 @@ Installable downloads are development artifacts. The server release must be depl
 to enable the new UI and endpoints; installing an APK/Home Screen icon does not
 update the server. Native-source and server-update archives exclude private keys,
 node_modules, toolchains, caches, environment files and site/database backups.
+
+## 28 November: real-engine category sales regression
+
+The production screenshot exposed a gap in the original fixture/mocked-engine
+coverage: the report resolver did not recognize the built-in child column `parent`.
+The new `tests/test_report_engine_child_fields.py` first reproduced the exact
+`Field parent not found on POS Invoice Item` failure, then passed after child-table
+system-column resolution was fixed. These tests run the actual mobile endpoint,
+query dispatcher and report engine with real PyPika-generated SQL against SQLite.
+The data includes returns and excluded invoices/products/parent document types.
+Both category and product amounts/quantities are checked against known totals.
+
+The complete Python suite now runs 54 tests: 52 pass and the same two optional
+runtime/transport checks are skipped. The server and dedicated hotfix ZIPs have
+been regenerated. No frontend or native code change is required for this fix.
+Live-site confirmation still requires deployment of the updated server module.

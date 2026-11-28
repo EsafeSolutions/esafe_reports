@@ -1,0 +1,3 @@
+# Standalone report-engine tests use the real SQL builder with in-memory SQLite.
+# Frappe already supplies its own query-builder dependency in a bench environment.
+PyPika==0.48.9

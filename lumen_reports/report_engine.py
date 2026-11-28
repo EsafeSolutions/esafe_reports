@@ -53,6 +53,8 @@ MAX_POINTS = 200
 MAX_TREE_CHILDREN = 20
 
 STANDARD_FIELDS = {"name", "owner", "creation", "modified", "modified_by", "docstatus", "idx"}
+# Frappe stores these on child tables without adding them to meta.fields.
+CHILD_TABLE_FIELDS = {"parent", "parenttype", "parentfield"}
 
 FILTER_OPERATORS = {"=", "!=", ">", "<", ">=", "<=", "like", "not like", "in", "not in", "between"}
 
@@ -77,7 +79,7 @@ class _Resolver:
 	def _validate_field(self, meta, doctype, fieldname):
 		if not isinstance(fieldname, str) or not FIELDNAME_PATTERN.match(fieldname):
 			frappe.throw(_("Invalid field name: {0}").format(str(fieldname)[:50]))
-		if fieldname in STANDARD_FIELDS:
+		if fieldname in STANDARD_FIELDS or (meta.istable and fieldname in CHILD_TABLE_FIELDS):
 			return
 		if not meta.get_field(fieldname):
 			frappe.throw(_("Field {0} does not exist on {1}").format(fieldname, doctype))
@@ -138,7 +140,11 @@ class _Resolver:
 			return table[field]
 
 		# bare name: base column, or auto parent field for a child base
-		if self.base_meta.get_field(field) or field in STANDARD_FIELDS:
+		if (
+			self.base_meta.get_field(field)
+			or field in STANDARD_FIELDS
+			or (self.base_meta.istable and field in CHILD_TABLE_FIELDS)
+		):
 			self._validate_field(self.base_meta, self.base_doctype, field)
 			return self.base[field]
 

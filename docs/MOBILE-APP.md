@@ -112,6 +112,12 @@ the shipped app or contact production. Set `PLAYWRIGHT_MODULE` if the package is
 provided outside the project. The native browser push subscription is simulated in
 that flow; device delivery requires the live-device checks above.
 
+For standalone Python checks outside a Frappe bench, install `tests/requirements.txt`
+in an isolated test environment first. The child-table regression tests use the
+real PyPika SQL builder and an in-memory SQLite database; a bench already supplies
+the query-builder dependency. See [the category sales hotfix](SALES-PARENT-HOTFIX.md)
+for the `Field parent not found on POS Invoice Item` failure.
+
 The [design concept](design/mobile-app-concept.png) was generated with the built-in
 image generator. Its prompt specified complete Overview, Alerts and Settings
 screens, existing brand colors, Plus Jakarta Sans, bottom navigation, touch controls,

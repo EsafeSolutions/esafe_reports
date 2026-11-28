@@ -1,3 +1,4 @@
 09dc0bd91edd35f24d192f807804b92197a160209ea9b87c85c5dec4918fc2dc  Esafe-BLABS-Android-development.apk
 24bffbb66d26c9013d5c86be2c0cb268697bba63c29a6e62a6882d0471fbf354  Esafe-BLABS-Mobile-Source.zip
-319b5218a433f72fc6df09857501efbff68ac30730e274077ad57d2894f6511c  Esafe-BLABS-Server-Update.zip
+756a66dc7d9e811af811220c59ee537e5d168d6b56fa5b2b50262a890c5f2266  Esafe-BLABS-Server-Update.zip
+7911370bcc0c7d3a1fc2110d9ae3b80946b2b1e0e2ed597c517df8d4a6cab085  Esafe-BLABS-Sales-Hotfix.zip
